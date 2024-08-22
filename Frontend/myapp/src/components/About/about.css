@@ -1,0 +1,65 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+}
+
+.about {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+  padding: 20px;
+}
+
+.abt-card {
+  padding: 40px;
+  max-width: 1000px;
+  text-align: center;
+}
+
+.abt-heading h1 {
+  font-size: 6rem;
+  margin-bottom: 20px;
+  color: white;
+  font-family: 'Montserrat';
+  font-weight: bold;
+}
+
+.abt-desc p {
+  font-size: 2.5rem; 
+  color: white;
+  line-height: 1.6;
+  font-family: 'Raleway'; 
+  font-weight: 500;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .abt-card {
+    padding: 30px;
+  }
+  
+  .abt-heading h1 {
+    font-size: 2.5rem;
+  }
+  
+  .abt-desc p {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .abt-card {
+    padding: 20px;
+  }
+  
+  .abt-heading h1 {
+    font-size: 2rem;
+  }
+  
+  .abt-desc p {
+    font-size: 1.1rem;
+  }
+}

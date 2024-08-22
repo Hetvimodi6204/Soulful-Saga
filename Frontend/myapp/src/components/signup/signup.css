@@ -1,0 +1,86 @@
+
+.signup {
+    position: relative; /* Ensure the pseudo-element is positioned relative to the .login element */
+    width: 80%;
+    max-width: 400px; /* Ensures the form does not get too large on big screens */
+    background: url('../Images/login.jpeg') no-repeat center center;
+    background-size: cover;
+    border: 1px solid #dddfe2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    margin:10% auto; /* Centers the form horizontally and adds some vertical margin */
+    height: 30vw; /* Allows the height to adjust based on content */
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+.signup-header{
+    font-size: 4rem;
+}
+.signup-or{
+    font-size: 2rem;
+}
+.signup > input {
+    border-radius: 8px;
+    border: 2px solid #dddfe2;
+    outline: none;
+    color: #1d2129;
+    margin-top:1rem;
+    padding: 0.5rem 0.75rem;
+    width: 65%;
+    font-size: 1rem;
+}
+.signup::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.4); /* Semi-transparent white overlay */
+    border-radius: 8px; /* Match the border-radius of the .login element */
+    z-index: -1; /* Ensure the overlay is behind the form content */
+}
+
+.signup {
+    position: relative; /* Ensure the form content is above the overlay */
+    z-index: 1;
+}
+.signup > .button {
+    background: #1877f2;
+    border: 1px solid #1877f2;
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    margin: 1rem 0.5rem;
+    margin-left: 6.6rem;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    width:65%;
+}
+@media (max-width: 480px) {
+    .signup {
+        width: 50%;
+        height: 100%;
+        padding: 0.75rem;
+       margin-top:7rem;
+    }
+
+    .signup > input{
+        width: 60%;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        margin-left:4rem;
+        margin-right: 4rem;
+    }
+    .signup .button {
+        width: 60%;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        margin-left:4rem;
+        margin-right: 4rem;
+    }
+}

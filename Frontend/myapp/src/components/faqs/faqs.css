@@ -1,0 +1,80 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.faqs{
+  font-size: 6rem;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8rem;
+}
+.main-div {
+  width: 100vw; /* Take full width of the container */
+  max-width: 1200px; /* Optional: Set a max-width if you want */
+  padding: 70px 20px;
+  border-radius: 10px;
+  margin: 0 auto;
+  display: flex;
+  gap: 20px; 
+}
+
+.column {
+  flex: 1; /* Each column takes up equal width */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Space between the FAQ items */
+  min-width: 550px;
+}
+
+.main-div h1 {
+  width: 100%;
+  text-align: center;
+  text-transform: capitalize;
+  font-size: 5rem;
+  letter-spacing: 5px;
+  word-spacing: 5px;
+  margin-bottom: 50px;
+  color: white;
+}
+
+.faq-item {
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: rgba(0, 0, 0, 0.10) 0 1px 4px;
+}
+
+.main-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  cursor: pointer;
+  background-color: #ffcba4;
+  transition: background-color 0.3s;
+}
+
+.main-heading:hover {
+  background-color: #ff6347;
+}
+
+.main-heading h3 {
+  flex: 1;
+  margin-left: 20px;
+  font-family: "Raleway", sans-serif;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  font-size: 2rem;
+  color: black;
+}
+
+.answers {
+  padding: 30px 20px 40px 20px;
+  font-size: 2rem;
+  word-spacing: 2px;
+  font-weight: 400;
+  line-height: 1.7;
+  background: #ff6347;
+  color: black;
+}

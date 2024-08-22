@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+}
+
+.features-container {
+  width: 100%;
+  min-height: 130vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #222222;
+  margin-top: -10rem;
+}
+
+.gradient-bg {
+  width: 85%; 
+  max-width: 100%;
+  height: 55rem;
+  padding: 5rem;
+  border-radius: 20px;
+  background-image: url(../Images/DarkCoral.png);
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  position: relative;
+  margin: 0 auto;
+}
+
+.heading {
+  text-align: center;
+  margin-bottom: 10rem;
+  font-size: 5rem;
+  color: white;
+}
+
+.mainContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: -60px;
+}
+
+.mainContainer .box {
+  background: #333333; 
+  border-radius: 15px;
+  padding: 2rem;
+  width: 30%;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  text-align: center;
+}
+
+.mainContainer .box:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.mainContainer .card {
+  padding: 2rem;
+}
+
+.card .image {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.card .image img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card .image:hover img {
+  transform: scale(1.05);
+}
+
+.card .desc h1 {
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1rem;
+}
+
+.card .desc p {
+  font-size: 1.6rem;
+  color: #ccc;
+  margin-bottom: 2rem;
+}
+
+.bton {
+  background-color: #ff6347;
+  color: black;
+  font-weight: 600;
+  padding: 1rem 2.5rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 2rem;
+  transition: background-color 0.3s ease;
+}
+
+.bton:hover {
+  background-color: #ffcba4;
+}
+
+@media screen and (max-width: 998px) {
+  .mainContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .mainContainer .box {
+    width: 80%;
+    margin-bottom: 2rem;
+  }
+}

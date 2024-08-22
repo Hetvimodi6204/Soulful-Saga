@@ -1,0 +1,136 @@
+.blog-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 8rem;
+  }
+  
+  .grid-section {
+    display: flex;
+    margin-bottom: 40px;
+  }
+  
+  .left-column {
+    flex: 1;
+    min-width: 30%;
+    background: url('../Images/login.jpeg') no-repeat center center;
+    background-size: cover;
+    border: 2px solid #dddfe2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    margin-right: 3rem;
+  }
+  
+  .right-column {
+    flex: 1;
+    min-width: 55%;
+  }
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); 
+    gap: 20px; 
+  }
+  
+  .grid-item {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: auto;
+  }
+
+  .blog-container {
+    width: 100%;
+    padding: 20px;
+  }
+  
+  .grid-section {
+    display: flex;
+    margin-bottom: 40px;
+  }
+  
+  .left-column, .right-column {
+    flex: 1;
+  }
+  
+  .left-column {
+    margin-right: 20px;
+  }
+  
+  .right-column .grid-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .grid-item {
+    flex: 1 1 calc(50% - 10px);
+    margin: 5px;
+  }
+  
+  .grid-item img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .influencer-section {
+    margin-top: 30px;
+    margin-bottom: 50px;
+  }
+  .influencer-section h2{
+     font-size: 4rem;
+     text-align: center;
+  }
+  .influencer-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 4rem;
+  }
+  
+  .influencer-profile {
+    flex: 1 1 calc(16.66% - 10px); 
+    margin: 5px;
+    text-align: center;
+  }
+  
+  .influencer-profile img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+  }
+  
+  .influencer-profile img {
+    transition: transform 0.3s ease;
+}
+
+.influencer-profile img:hover {
+    transform: scale(0.9);
+}
+  .influencer-profile h3 {
+    margin: 10px 0 5px;
+    font-size: 2rem;
+  }
+  
+  .influencer-profile p {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .social-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .social-icons a {
+    color: black;
+    font-size: 1.5em;
+  }
+  
+  .social-icons a:hover {
+    color:gray;
+  }
+  

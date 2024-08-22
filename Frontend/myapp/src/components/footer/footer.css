@@ -1,0 +1,137 @@
+/* Footer.css */
+
+/* General reset and box-sizing */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Ensure the body and html take up the full height */
+html, body, #root {
+    height: 100%;
+}
+
+/* Set up the main container to use flexbox */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Content should take up all available space except for the footer */
+main {
+    flex: 1;
+}
+
+/* Footer styles */
+footer {
+    background-color: #ffcba4;
+    padding: 20px 0;
+    font-family: Arial, sans-serif;
+    color: #333;
+    width: 100%;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-newsletter, .footer-explore, .footer-connect, .footer-followus {
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.footer-newsletter p,
+.footer-explore h2, .footer-connect h2, .footer-followus h2 {
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.footer-newsletter form {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-newsletter input[type="email"] {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.footer-newsletter input[type="submit"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #ff6347;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.footer-explore p1, .footer-connect p1, .footer-followus p1 {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 1.7rem;
+    color: #ff6347;
+}
+
+.footer-followus .footer-icons {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-followus .footer-icons div {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.footer-followus .footer-icons div a {
+    margin-right: 10px;
+    color: #333;
+    font-size: 24px;
+    text-decoration: none;
+}
+
+.footer-followus .footer-icons div p1 {
+    margin: 0;
+}
+
+.footer-newsletter p {
+    font-size: 12px;
+    color: #999;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .footer-newsletter, .footer-explore, .footer-connect, .footer-followus {
+        flex: 1 1 100%;
+        margin: 10px 0;
+    }
+
+    .footer-followus .footer-icons {
+        flex-direction: row;
+        justify-content: center;
+        margin-left: 50rem; /* Adjust this margin as needed */
+    }
+
+    .footer-followus .footer-icons div {
+        margin: 0 10px;
+    }
+}

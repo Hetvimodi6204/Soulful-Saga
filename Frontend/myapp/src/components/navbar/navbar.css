@@ -1,0 +1,320 @@
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Jost", sans-serif;
+}
+
+html {
+  font-size: 62.5%;
+}
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+/* Navbar style start */
+.main-nav {
+  width: 100%;
+  height: 7rem;
+  display: grid;
+  grid-template-columns: 10rem 1fr 2fr 1fr 10rem;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px; */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background-color:#222222;
+  /* margin-top: 3rem; */
+}
+
+.logo {
+  display: grid;
+  grid-column: 2/3;
+  justify-content: start;
+  align-items: center;
+  margin-left: 6rem;
+}
+
+.logo-img {
+  width: 4rem;
+  height: 5rem;
+  /* margin-right: 10px; */
+  margin-top: 1rem;
+  margin-left: 11.5rem;
+
+}
+.menu-link {
+  grid-column: 3/4;
+}
+
+.menu-link ul {
+  height: 7rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: white;
+}
+
+.login-signup-btn {
+  grid-column: 4/5;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 2rem;
+  height: 7rem;
+  /* Added to push the hamburger to the edge */
+}
+
+.login-signup-btn ul {
+  height: 7rem;
+  display: grid;
+  grid-template-columns: 3fr repeat(3, 1fr);
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.login-signup-btn ul li {
+  text-align: right;
+}
+
+.login-signup-btn ul li:first-child {
+  grid-column: 2/3;
+}
+
+/* ----------- Grid part ends ----------------- */
+.logo h2 {
+  font-size: 2.5rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  /* background: linear-gradient(#eee, rgb(69, 57, 248));
+  -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: transparent; */
+  font-weight: bold;
+  color: white;
+}
+
+.logo h2 span {
+  font-size: 3.5rem;
+}
+
+.menu-link ul li {
+  font-size: 2rem;
+  color: white;
+}
+
+.menu-link ul li a {
+  text-transform: capitalize;
+  color: rgba(255, 255, 255);
+  transition: 0.5s;
+}
+
+.menu-link ul li:hover>a {
+  transform-origin: left;
+  color: rgba(255, 255, 255, 0.8); 
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+.login-signup-btn ul li {
+  font-size: 1.8rem;
+}
+
+.login-signup-btn .hamburger-menu {
+  display: none;
+  font-size: 3rem;
+  /* Added font-size for the hamburger menu */
+  cursor: pointer;
+  color: rgba(0, 0, 3, 0.8);
+  transition: color 0.3s ease;
+}
+
+.login-signup-btn .hamburger-menu:hover {
+  color: rgba(0, 0, 3, 1);
+}
+
+/* Hero section */
+.hero-section {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.hero-section p {
+  font-size: 3rem;
+  text-transform: capitalize;
+}
+
+.hero-section h1 {
+  font-size: 5rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Responsive css style */
+@media (max-width: 1080px) {
+  .main-nav {
+    height: 7rem;
+    grid-template-columns: 2rem 3fr 3fr 1fr 2rem;
+  }
+
+  .logo,
+  .menu-link ul,
+  .login-signup-btn ul {
+    height: 8rem;
+  }
+}
+
+@media (max-width: 998px) {
+  .main-nav {
+    height: 7rem;
+    grid-template-columns: 2rem 2fr 3fr 1fr 2rem;
+  }
+
+  .menu-link {
+    display: none;
+    /* Hide menu links */
+  }
+
+  .logo,
+  .login-signup-btn ul {
+    height: 7rem;
+  }
+
+  .login-signup-btn {
+    grid-column: 4/5;
+    justify-self: end;
+  }
+
+  .login-signup-btn .btn-logo {
+    display: none;
+    /* Hide buttons */
+  }
+
+  .login-signup-btn .hamburger-menu {
+    display: block;
+    /* Show hamburger menu */
+  }
+
+  .mobile-menu-link {
+    grid-column: 2/4;
+    position: relative;
+    z-index: 99;
+    background-color: white;
+    height: 20rem;
+    display: grid;
+    align-items: center;
+    padding-left: 3rem;
+    transition: all 2s linear;
+    transform-origin: top;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+  }
+
+  .mobile-menu-link ul {
+    height: 20rem;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: start;
+  }
+}
+
+@media (max-width: 798px) {
+  .main-nav {
+    height: 6rem;
+    grid-template-columns: 1rem 2fr 1fr 1fr 1rem;
+  }
+
+  .logo,
+  .login-signup-btn ul {
+    height: 6rem;
+  }
+
+  .login-signup-btn {
+    height: 6rem;
+    display: flex;
+    justify-self: end;
+    align-items: center;
+  }
+
+  .login-signup-btn .hamburger-menu {
+    display: block;
+    /* Ensure hamburger menu is visible */
+  }
+}
+
+@media (max-width: 520px) {
+  .main-nav {
+    height: 6rem;
+    grid-template-columns: 1rem 4fr 1fr 1fr 1rem;
+  }
+
+  .logo,
+  .login-signup-btn ul {
+    height: 6rem;
+  }
+
+  .logo h2 {
+    font-size: 2rem;
+  }
+
+  .login-signup-btn {
+    height: 6rem;
+    display: flex;
+    justify-self: end;
+    align-items: center;
+  }
+
+  .login-signup-btn .hamburger-menu {
+    display: block;
+    /* Ensure hamburger menu is visible */
+  }
+
+  /* Hero section */
+  .hero-section h1 {
+    font-size: 3.8rem;
+  }
+}
+
+/* Login and Signup button styles */
+.login-signup-btn ul li button {
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  color: black;
+  background-color:#ffcba4;
+  /* Change this color as needed */
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 1.5rem;
+  /* margin-left: 4rem; */
+  font-weight: 600;
+  /* Space between buttons */
+}
+
+.login-signup-btn ul li button:hover {
+  background-color: #ff7f50;
+  /* Change this color as needed for hover effect */
+}
+
+.login-signup-btn ul li:first-child button {
+  background-color: #ffcba4;
+  margin-right: 3rem;
+
+  /* Different color for login button */
+}
+
+.login-signup-btn ul li:first-child button:hover {
+  background-color: #ff7f50;
+  /* Different hover color for login button */
+}

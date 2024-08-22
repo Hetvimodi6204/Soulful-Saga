@@ -1,0 +1,101 @@
+.login {
+    position: relative; 
+    width: 80%;
+    max-width: 400px;
+    background: url('../Images/login.jpeg') no-repeat center center;
+    background-size: cover;
+    border: 1px solid #dddfe2;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
+    border-radius: 8px;
+    padding: 1rem;
+    align-items: center;
+    text-align: center;
+    margin:10% auto;
+    height: 30vw; 
+    overflow: hidden;
+    margin-bottom: 3rem;
+}
+.login-heading{
+    font-size: 4rem;
+}
+.login-or{
+    font-size: 2rem;
+}
+.login > input {
+    border-radius: 8px;
+    border: 2px solid #dddfe2;
+    outline: none;
+    color: #1d2129;
+    margin-top:1rem;
+    padding: 0.5rem 0.75rem;
+    width: 70%;
+    font-size: 1rem;
+}
+
+.login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    z-index: -1;
+}
+
+.login {
+    position: relative; /* Ensure the form content is above the overlay */
+    z-index: 1;
+}
+
+.login > .button {
+    background: #1877f2;
+    border: 1px solid #1877f2;
+    color: #fff;
+    font-size: 1.25rem;
+    padding: 0.5rem;
+    margin: 1rem 0.5rem;
+    margin-left: 5.7rem;
+    border-radius: 8px;
+    outline: none;
+    cursor: pointer;
+    width: 70%;
+}
+
+
+@media (max-width: 768px) {
+    .login {
+        width: 90%;
+        margin-top: 20rem;
+    }
+
+    .login > input, .login .button {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .login {
+        width: 50%;
+        height: 100%;
+        padding: 0.75rem;
+       margin-top:7rem;
+    }
+
+    .login > input{
+        width: 60%;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        margin-left:4rem;
+        margin-right: 4rem;
+    }
+    .login .button {
+        width: 60%;
+        font-size: 0.9rem;
+        padding: 0.4rem 0.6rem;
+        margin-left:4rem;
+        margin-right: 4rem;
+    }
+}
