@@ -1,136 +1,187 @@
-.blog-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    margin-top: 8rem;
-  }
-  
-  .grid-section {
-    display: flex;
-    margin-bottom: 40px;
-  }
-  
-  .left-column {
-    flex: 1;
-    min-width: 30%;
-    background: url('../Images/login.jpeg') no-repeat center center;
-    background-size: cover;
-    border: 2px solid #dddfe2;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
-    margin-right: 3rem;
-  }
-  
-  .right-column {
-    flex: 1;
-    min-width: 55%;
-  }
-  
-  .grid-container {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr); 
-    gap: 20px; 
-  }
-  
-  .grid-item {
-    background-color: #f0f0f0;
-    padding: 20px;
-    border-radius: 8px;
-  }
-  
-  .grid-item img {
-    width: 100%;
-    height: auto;
-  }
+body {
+  margin-top: 3rem;
+  padding: 0;
+  background-color: #222222;
+}
 
-  .blog-container {
-    width: 100%;
-    padding: 20px;
-  }
-  
-  .grid-section {
-    display: flex;
-    margin-bottom: 40px;
-  }
-  
-  .left-column, .right-column {
-    flex: 1;
-  }
-  
-  .left-column {
-    margin-right: 20px;
-  }
-  
-  .right-column .grid-container {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .grid-item {
-    flex: 1 1 calc(50% - 10px);
-    margin: 5px;
-  }
-  
-  .grid-item img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .influencer-section {
-    margin-top: 30px;
-    margin-bottom: 50px;
-  }
-  .influencer-section h2{
-     font-size: 4rem;
-     text-align: center;
-  }
-  .influencer-row {
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: 4rem;
-  }
-  
-  .influencer-profile {
-    flex: 1 1 calc(16.66% - 10px); 
-    margin: 5px;
-    text-align: center;
-  }
-  
-  .influencer-profile img {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
-  
-  .influencer-profile img {
-    transition: transform 0.3s ease;
+.blog-container {
+  max-width: 1200px;
+  margin: 8rem auto 0 auto;
+  padding: 20px;
+  background-color: #222222;
+}
+.cat-heading{
+  font-size: 4rem;
+  text-align: center;
+  color: white;
+  margin-bottom: 3rem;
+}
+.grid-section {
+  display: flex;
+  margin-bottom: 40px;
+}
+
+.left-column {
+  flex: 1;
+  min-width: 30%;
+  background: no-repeat center center;
+  background-size: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  margin-right: 3rem;
+}
+
+.cat-image{
+  flex: 1;
+  max-width: 100%;
+  background-size: cover;
+  margin-right: 3rem;
+  border: 2px solid white;
+  border-radius: 10px;
+}
+.right-column {
+  flex: 1;
+  min-width: 55%;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px;
+}
+
+.grid-item {
+  display: flex;
+  /* Use flexbox for horizontal alignment */
+  align-items: center;
+  /* Center items vertically */
+  background-color: #333333;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.grid-item img {
+  width: 100px;
+  /* Adjust width as needed */
+  height: auto;
+  /* Maintain aspect ratio */
+  border-radius: 8px;
+}
+
+.video-thumbnail {
+  position: relative;
+  flex-shrink: 0;
+  /* Prevent the thumbnail from shrinking */
+  margin-right: 20px;
+  /* Space between thumbnail and details */
+}
+
+.video-thumbnail img {
+  width: 130px; /* Adjust width as needed */
+  height: 8rem; /* Maintain aspect ratio */
+  border-radius: 8px;
+  transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+.thumbnail-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent overlay */
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0; /* Hide the overlay by default */
+  transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+  border-radius: 8px;
+  text-align: center;
+}
+
+.thumbnail-overlay span {
+  font-size: 1rem;
+  padding: 10px;
+}
+
+.video-thumbnail:hover .thumbnail-overlay {
+  opacity: 1; /* Show the overlay on hover */
+}
+.video-details {
+  color: white;
+  flex: 1;
+}
+
+.grid-item h3 {
+  margin: 0 0 10px;
+  font-size: 1.6rem;
+}
+
+.grid-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.influencer-section {
+  margin: 30px auto 50px;
+  text-align: center;
+}
+
+.influencer-section h2 {
+  font-size: 4rem;
+  color: white;
+}
+
+.influencer-row {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 10px;
+}
+
+.influencer-profile {
+  flex: 1 1 calc(20% - 20px);
+  text-align: center;
+  margin: 10px;
+}
+
+.influencer-profile img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  transition: transform 0.3s ease;
+  border: 3px solid white;
 }
 
 .influencer-profile img:hover {
-    transform: scale(0.9);
+  transform: scale(0.9);
 }
-  .influencer-profile h3 {
-    margin: 10px 0 5px;
-    font-size: 2rem;
-  }
-  
-  .influencer-profile p {
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  .social-icons {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-  }
-  
-  .social-icons a {
-    color: black;
-    font-size: 1.5em;
-  }
-  
-  .social-icons a:hover {
-    color:gray;
-  }
-  
+
+.influencer-profile h3 {
+  margin: 10px 0 5px;
+  font-size: 2rem;
+  color: white;
+}
+
+.influencer-profile p {
+  font-size: 0.9rem;
+  color: white;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.social-icons a {
+  color: white;
+  font-size: 1.5em;
+  transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+  color: gray;
+}

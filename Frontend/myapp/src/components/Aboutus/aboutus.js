@@ -42,7 +42,7 @@ const AboutUs = () => {
       {/* Section 1: About Us Heading and Description */}
       <div className="bg-abt">
         <div className="top-image-container">
-          <div className="top-image"><h1 className="top-header"> About Us</h1></div>
+          <div className="top-image"></div>
           <div className="center-card-container">
             <div className={`center-card reveal ${visibleElements.aboutText ? 'visible' : ''}`}>
               <p ref={aboutTextRef}>

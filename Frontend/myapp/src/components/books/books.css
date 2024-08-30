@@ -90,7 +90,7 @@
   overflow: hidden;
   white-space: nowrap;
   position: relative;
-  background-color: burlywood;
+  background-color: #ff6347;
   margin-top: 30rem;
 }
 
@@ -126,7 +126,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #f0f0f0;
+  background-color: #222222;
   padding: 10px 20px;
   position: relative;
   margin-top: 0rem;
@@ -165,10 +165,12 @@
   margin-left: 1rem;
   font-size: 2rem;
   margin-right: 5rem;
+  color: white;
 }
 
 .favorites-icon {
   position: relative;
+  color: white;
 }
 
 .favorites-icon .favorites-count {
@@ -216,14 +218,14 @@
   font-size: 4.5rem;
   text-align: center;
   margin-top: 2rem;
-  color: #007BFF;
+  color: white;
   background-color: #222222;
 }
 
 .lang {
   color: gray;
   text-align: center;
-  margin-right: 6rem;
+  margin-right: 11rem;
   margin-top: 0.7rem;
   font-size: 1.4rem;
   text-transform: uppercase;
@@ -233,29 +235,32 @@
 .title {
   color: black;
   text-align: center;
-  margin-right: 6rem;
+  margin-right: 11rem;
   font-size: 2rem;
   background-color: #222222;
+  color: white;
 }
 
 .descrip {
   text-align: center;
-  margin-right: 6rem;
+  margin-right: 11rem;
   font-size: 1.7rem;
   background-color: #222222;
+  color: white;
 }
 
 .price {
   color: black;
   text-align: center;
-  margin-right: 6rem;
+  margin-right: 11rem;
   font-size: 1.5rem;
   font-weight: bold;
   background-color: #222222;
+  color: white;
 }
 
 .addtocartbtn {
-  background-color:#007BFF;
+  background-color:#ff6347;
   border: none;
   color: white;
   padding: 5px 15px;
@@ -263,13 +268,14 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin:0rem 5rem;
+  /* margin:0rem 9rem; */
   cursor: pointer;
   border-radius: 3px;
+  margin-left: 5.5rem;
 }
 
 .addtocartbtn:hover {
-  background-color: #78b4f3;
+  background-color: #ffcba4;
 }
 
 
@@ -297,7 +303,7 @@
 .browse-categories {
   font-size: 4.5rem;
   text-align: center;
-  color: #007BFF;
+  color:white;
   background-color: #222222;
 }
 
@@ -350,7 +356,7 @@
 }
 
 .load-more {
-  background-color: #007BFF;
+  background-color: #ff6347;
   color: white;
   border: none;
   border-radius: 4px;
@@ -360,6 +366,9 @@
   padding: 10px 20px;
 }
 
+.load-more:hover{
+  background-color: #ffcba4;
+}
 .books1,
 .books2 {
   position: relative;
@@ -386,9 +395,9 @@
   top: 0;
   left: 0;
   margin-top: -1rem;
-  margin-left: -2.5rem;
+  margin-left: -0.6rem;
   height: 27rem;
-  width: 25rem;
+  width: 21rem;
   background-color: rgba(255, 255, 255, 0.5);
   display: flex;
   align-items: center;

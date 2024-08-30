@@ -3,7 +3,7 @@ import "./signup.css";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../navbar/navbar.js"
-
+import SignupImage from '../Images/cutout.png'; 
 const Signup = () => {
     const navigate = useNavigate(); // Assign the navigate function
     const [user, setUser] = useState({
@@ -49,17 +49,57 @@ const Signup = () => {
     };
 
     return (
-        <div className="signup">
-            <Navbar/>
-            <h1 className="signup-header">Signup</h1>
-            <input type="text" name="name" value={user.name} placeholder="Your Name" onChange={handleChange} />
-            <input type="email" name="email" value={user.email} placeholder="Your Email" onChange={handleChange} />
-            <input type="password" name="password" value={user.password} placeholder="Your Password" onChange={handleChange} />
-            <input type="password" name="reEnterPassword" value={user.reEnterPassword} placeholder="Re-enter Password" onChange={handleChange} />
-            <div className="button" onClick={signup}>Signup</div>
-            <div className="signup-or">or</div>
-            <div className="button" onClick={() => navigate("/login")}>Login</div>
-        </div>
+        <>
+            <Navbar />
+            <div className="signup">
+                <div className="signup-left">
+                    <div className="create">
+                        <h1 className="create-heading">Create Account</h1>
+                        <p className="create-p">to get started now!</p>
+                    </div>
+                    <div className="signup-form">
+                        <input
+                            type="text"
+                            name="name"
+                            value={user.name}
+                            onChange={handleChange}
+                            placeholder="Enter your Name"
+                        />
+                        <input
+                            type="email"
+                            name="email"
+                            value={user.email}
+                            onChange={handleChange}
+                            placeholder="Enter your Email"
+                        />
+                        <input
+                            type="password"
+                            name="password"
+                            value={user.password}
+                            onChange={handleChange}
+                            placeholder="Enter your Password"
+                        />
+                        <input
+                            type="password"
+                            name="reEnterPassword"
+                            value={user.reEnterPassword}
+                            onChange={handleChange}
+                            placeholder="Re-enter your Password"
+                        />
+                        <div className="button" onClick={signup}>
+                            Signup
+                        </div>
+                        <div className="signup-or">or</div>
+                        <div className="button" onClick={() => navigate("/login")}>
+                            Login
+                        </div>
+                    </div>
+                </div>
+                <div className="signup-image">
+                    <img src={SignupImage} alt="Promotional" />
+                </div>
+            </div>
+        </>
     );
 };
 

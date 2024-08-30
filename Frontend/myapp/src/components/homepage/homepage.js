@@ -8,8 +8,7 @@ import Features from "../features/features.js";
 import Faqs from "../faqs/faqs.js";
 import Contact from "../contact/contact.js";
 import Footer from "../footer/footer.js";
-import "./homepage.css";  // Import the new CSS file
-
+import "./homepage.css"; 
 const Homepage = () => {
   const featuresRef = useRef(null);
   const faqsRef = useRef(null);

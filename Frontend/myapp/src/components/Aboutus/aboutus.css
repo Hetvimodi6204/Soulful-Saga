@@ -2,7 +2,7 @@
     height: 40vw;
     background-size: cover;
     background-position: center;
-    background-color: beige;
+    background-color: #222222;
 }
 
 .section {
@@ -31,7 +31,7 @@
 .top-image {
     height: 100%;
     width: 100%;
-    background-color: rgb(90, 143, 235);
+    background-color: #ffcba4;
     background-size: cover;
     color: white;
     z-index: 1;

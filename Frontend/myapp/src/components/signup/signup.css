@@ -1,86 +1,130 @@
-
 .signup {
-    position: relative; /* Ensure the pseudo-element is positioned relative to the .login element */
-    width: 80%;
-    max-width: 400px; /* Ensures the form does not get too large on big screens */
-    background: url('../Images/login.jpeg') no-repeat center center;
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    background: url('../Images/DarkCoral.png') no-repeat center center;
     background-size: cover;
-    border: 1px solid #dddfe2;
-    box-shadow: 0 2px 4px rgb(0 0 0 / 10%), 0 8px 16px rgb(0 0 0 / 10%);
     border-radius: 8px;
-    padding: 1rem;
+    padding: 2rem;
+    margin: 10% auto;
+    display: flex;
+    justify-content: space-between;
     align-items: center;
-    text-align: center;
-    margin:10% auto; /* Centers the form horizontally and adds some vertical margin */
-    height: 30vw; /* Allows the height to adjust based on content */
-    overflow: hidden;
+    overflow: visible;
     margin-bottom: 3rem;
+    color: #fff;
+    z-index: 1;
 }
-.signup-header{
+
+.signup-left {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-right: 2rem;
+}
+
+.create {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.create-heading {
     font-size: 4rem;
+    margin: 0;
 }
-.signup-or{
-    font-size: 2rem;
+
+.create-p {
+    font-size: 3rem;
+    margin: 0.5rem 0 0 0;
 }
-.signup > input {
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.signup-form > input {
     border-radius: 8px;
     border: 2px solid #dddfe2;
     outline: none;
     color: #1d2129;
-    margin-top:1rem;
-    padding: 0.5rem 0.75rem;
-    width: 65%;
-    font-size: 1rem;
+    margin-top: 1rem;
+    padding: 0.7rem 0.75rem;
+    width: 100%;
+    font-size: 1.6rem;
+    text-align: left;
 }
-.signup::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(255, 255, 255, 0.4); /* Semi-transparent white overlay */
-    border-radius: 8px; /* Match the border-radius of the .login element */
-    z-index: -1; /* Ensure the overlay is behind the form content */
+.signup-or {
+    font-size: 2rem;
+    text-align: center;
+    margin-left: 21rem;
+    color: #333333;
 }
 
-.signup {
-    position: relative; /* Ensure the form content is above the overlay */
-    z-index: 1;
-}
-.signup > .button {
-    background: #1877f2;
-    border: 1px solid #1877f2;
-    color: #fff;
-    font-size: 1.25rem;
-    padding: 0.5rem;
-    margin: 1rem 0.5rem;
-    margin-left: 6.6rem;
+.button {
+    background: #ffcba4;
+    color: black;
+    font-size: 1.5rem;
+    padding: 0.7rem;
+    margin: 1rem 0;
     border-radius: 8px;
     outline: none;
     cursor: pointer;
-    width:65%;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
 }
-@media (max-width: 480px) {
+
+.signup-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -11rem;
+    margin-bottom: -6.5rem;
+    margin-right: -3rem;
+    z-index: 2;
+}
+
+.signup-image img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+@media (max-width: 768px) {
     .signup {
-        width: 50%;
-        height: 100%;
-        padding: 0.75rem;
-       margin-top:7rem;
+        flex-direction: column;
+        height: auto;
     }
 
-    .signup > input{
-        width: 60%;
-        font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
-        margin-left:4rem;
-        margin-right: 4rem;
+    .signup-left {
+        padding-right: 0;
     }
-    .signup .button {
-        width: 60%;
-        font-size: 0.9rem;
-        padding: 0.4rem 0.6rem;
-        margin-left:4rem;
-        margin-right: 4rem;
+
+    .signup-form {
+        width: 100%;
+    }
+
+    .signup-image {
+        margin-top: 1rem;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .signup {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    .signup-form > input, .signup .button {
+        font-size: 1rem;
+        padding: 0.5rem;
+    }
+
+    .signup-image {
+        margin-top: -1rem;
     }
 }
