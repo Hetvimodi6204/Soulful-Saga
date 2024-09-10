@@ -60,11 +60,13 @@ const contactheading = {
   marginBottom: '20px',
   color: 'white',  
   fontSize: '4rem',
+  fontFamily: 'Expletus Sans',
 };
 
 const pdata = {
   marginBottom: '20px',
   fontSize: '2.5rem',
+  fontFamily: 'Expletus Sans',
 };
 
 export default Homepage;

@@ -2,10 +2,12 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import validator from "validator";
+import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import bodyParser from "body-parser";
 import bcrypt from 'bcrypt';
 const SECRET_KEY = "6c9d458811e4ce70cbf5420cc9c2c01616cdd2d77e9938bb545fb34601094d35297303bead7348a7ff1a7a5a53164ee0c712c2ba3685ee8249e7044a288dcde4";
+import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 9002;
@@ -15,8 +17,12 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: 'http://localhost:3000',
+    methods: ["GET,POST, PUT, HEAD, DELETE, PATCH"],
     credentials: true,
 }));
+
+dotenv.config();
+app.use(cookieParser());
 
 // Connect to MongoDB
 mongoose.connect("mongodb://localhost:27017/SoulfulSaga", {
@@ -33,7 +39,6 @@ mongoose.connect("mongodb://localhost:27017/SoulfulSaga", {
 
 const bookSchema = new mongoose.Schema({
     title: String,
-    author: String,
     price: Number,
     language: String
 });
@@ -56,12 +61,22 @@ const userSchema = new mongoose.Schema({
         required: true,
         minlength: 8
     },
-    // favorites: [bookSchema], 
-    // cart: [bookSchema]
+    favorites: [
+        {
+            bookId: { type: mongoose.Schema.Types.ObjectId, ref: 'Book' },
+            title: { type: String },
+            price: { type: String },
+            language: { type: String },
+        }
+    ],
+
     cart: [
         {
             bookId: { type: mongoose.Schema.Types.ObjectId, ref: 'Book' },
-            quantity: { type: Number, default: 1 }
+            title: { type: String },
+            price: { type: String },
+            language: { type: String },
+            quantity: { type: Number, default: 1 },
         }
     ]
 });
@@ -72,46 +87,70 @@ export default Book;
 
 app.get('/books', async (req, res) => {
     try {
-        const books = await Book.find(); 
+        const books = await Book.find();
         res.json(books);
     } catch (error) {
         console.error('Error fetching books:', error);
         res.status(500).json({ error: 'Error fetching books' });
     }
 });
+
+
+
 app.post("/login", async (req, res) => {
     const { email, password } = req.body;
 
     try {
+        // Check if email and password are provided
         if (!email || !password) {
             return res.status(400).json({ message: "Please enter email and password." });
         }
+
         // Validate email format
         if (!validator.isEmail(email)) {
             return res.status(400).json({ message: "Invalid email format." });
         }
+
         // Validate password length
         if (password.length < 8) {
             return res.status(400).json({ message: "Password must be at least 8 characters long." });
         }
 
-        // Find user by email and password
-        const user = await User.findOne({ email }).exec();
+        // Find user by email
+        const user = await User.findOne({ email });
         if (!user) {
             return res.status(404).json({ message: "Invalid credentials. Please try again." });
         }
+
+        // Validate password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             return res.status(404).json({ message: "Invalid credentials. Please try again." });
         }
-        // User found, login successful
-        const token = jwt.sign({ userId: user._id }, SECRET_KEY, { expiresIn: '1h' });
-        res.status(200).json({ token, user });
+
+        // Generate JWT token
+        const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY);
+        console.log(token);
+
+        // Store token in a cookie
+        res.cookie("access_token", token, {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: false, 
+        });
+        
+        console.log("cookie generated");
+
+        // Respond with user info (excluding password)
+        const { password: pass, ...userData } = user._doc;
+        res.status(200).json({ ...userData, token });
+        console.log("cookie stored");
     } catch (err) {
         console.error("Error logging in:", err);
         res.status(500).json({ message: "Error logging in. Please try again later." });
     }
 });
+
 
 app.post("/signup", async (req, res) => {
     const { name, email, password } = req.body;
@@ -121,10 +160,12 @@ app.post("/signup", async (req, res) => {
         if (!name || !email || !password) {
             return res.status(400).json({ message: "Please fill all fields." });
         }
+
         // Validate email format
         if (!validator.isEmail(email)) {
             return res.status(400).json({ message: "Invalid email format." });
         }
+
         // Validate password length
         if (password.length < 8) {
             return res.status(400).json({ message: "Password must be at least 8 characters long." });
@@ -136,60 +177,94 @@ app.post("/signup", async (req, res) => {
             return res.status(400).json({ message: "Email already exists. Please use a different email." });
         }
 
+        // Hash the password
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // Create a new user
         const newUser = new User({
             name,
             email,
-            password: hashedPassword
+            password: hashedPassword,
         });
 
         await newUser.save();
-        res.status(200).json(newUser);
+
+        // Respond with user info (excluding password)
+        const { password: pass, ...userData } = newUser._doc;
+        res.status(200).json(userData);
     } catch (err) {
         console.error("Error signing up:", err);
-        res.status(500).json({ message: "Error signing up. Please try again later." });
+        res.status(500).json({ message: err });
     }
 });
 
-const authenticateToken = (req, res, next) => {
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
-    if (token == null) return res.status(401).json({ message: "No token provided" });
-    jwt.verify(token, SECRET_KEY, (err, user) => {
-        if (err) {
-            console.error("JWT Verification Error:", err.message);
-            return res.status(403).json({ message: "Forbidden" });
-        }
-        req.user = user;
-        next();
-    });
-};
 
-// Adding and removing books from favorites
-app.post("/add-to-favorites", authenticateToken, async (req, res) => {
-    const { book } = req.body;
+const authenticateToken = (req, res, next) => {
+    const token = req.cookies.access_token; 
+    console.log("Token received:", token); 
+    if (!token) {
+        return res.status(403).json({ message: "No token provided, authorization denied." });
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.SECRET_KEY);
+        req.user = decoded; // Attach the decoded user information to the request
+        next();
+    } catch (err) {
+        console.error("Token verification failed:", err);
+        res.status(403).json({ message: "Invalid token, authorization denied." });
+    }
+};
+// Fetch the user's favorites when fetching books
+app.get("/favorites", authenticateToken, async (req, res) => {
     const userId = req.user.userId;
 
     try {
+        const user = await User.findById(userId).populate('favorites.bookId');
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+        console.log("Favorites for user:", user.favorites); 
+        res.status(200).json({
+            favorites: user.favorites
+        });
+    } catch (err) {
+        console.error("Error fetching favorites:", err);
+        res.status(500).json({ message: "Error fetching favorites. Please try again later." });
+    }
+});
+// Adding and removing books from favorites
+app.post("/add-to-favorites", authenticateToken, async (req, res) => {
+    let { bookId, title, price, language } = req.body;
+    const userId = req.user.userId;
+
+    try {
+        bookId = new mongoose.Types.ObjectId(bookId);
+
         const user = await User.findById(userId);
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // Check if the book already exists in favorites
-        const alreadyFavorite = user.favorites.some(fav => fav._id.toString() === book._id);
+        const alreadyFavorite = user.favorites.some(fav => fav.bookId.toString() === bookId.toString());
 
-        if (!alreadyFavorite) {
-            user.favorites.push(book);
+        if (alreadyFavorite) {
+            user.favorites = user.favorites.filter(fav => fav.bookId.toString() !== bookId.toString());
         } else {
-            user.favorites = user.favorites.filter(fav => fav._id.toString() !== book._id);
+            user.favorites.push({
+                bookId: new mongoose.Types.ObjectId(bookId),
+                title: title,
+                price: price,
+                language: language,
+            });
         }
 
         await user.save();
+        const updatedUser = await User.findById(userId).populate('favorites.bookId');
+
         res.status(200).json({
             message: alreadyFavorite ? "Book removed from favorites" : "Book added to favorites",
-            favorites: user.favorites
+            favorites: updatedUser.favorites 
         });
     } catch (err) {
         console.error("Error adding to favorites:", err);
@@ -197,13 +272,19 @@ app.post("/add-to-favorites", authenticateToken, async (req, res) => {
     }
 });
 
-// Adding and removing books from cart
+
 app.post("/add-to-cart", authenticateToken, async (req, res) => {
-    const { bookId } = req.body;
+    let { bookId } = req.body;
+
+    const { title, price, language,quantity = 1 } = req.body; 
     const userId = req.user.userId;
 
     console.log("User ID:", userId);
     console.log("Book ID:", bookId);
+
+    if (typeof bookId === 'number') {
+        bookId = new mongoose.Types.ObjectId(bookId);
+    }
 
     if (!mongoose.Types.ObjectId.isValid(bookId)) {
         return res.status(400).json({ message: "Invalid book ID" });
@@ -215,16 +296,19 @@ app.post("/add-to-cart", authenticateToken, async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        // const cartItem = user.cart.find(item => item.bookId.toString() === bookId);
-
         const cartItem = user.cart.find(item => item.bookId && item.bookId.toString() === bookId);
 
         if (cartItem) {
-            cartItem.quantity += 1; 
+            cartItem.quantity += quantity;
         } else {
-            user.cart.push({ bookId }); 
+            user.cart.push({
+                bookId: bookId,
+                title: title,
+                price: price,
+                language: language,
+                quantity: quantity
+            });
         }
-
 
         await user.save();
         res.status(200).json({ message: "Book added to cart", cart: user.cart });
@@ -234,30 +318,61 @@ app.post("/add-to-cart", authenticateToken, async (req, res) => {
     }
 });
 
+// Remove from favorites (server-side)
+app.post('/remove-from-favorites', authenticateToken, async (req, res) => {
+    let { bookId } = req.body; // Destructure bookId from request body
+    const userId = req.user.userId; // Get userId from the authenticated token
 
-// Remove a book from the user's cart
-app.post("/remove-from-cart", authenticateToken, async (req, res) => {
-    const { bookId } = req.body;
-    const userId = req.user.userId;
+    console.log("Received bookId:", bookId); // Debugging log
+    console.log("Received userId:", userId); // Debugging log
 
     try {
+        // Validate bookId format
+        if (!mongoose.Types.ObjectId.isValid(bookId)) {
+            console.error("Invalid bookId format:", bookId); // Debugging log
+            return res.status(400).json({ message: "Invalid bookId format" });
+        }
+
+        // Convert bookId to ObjectId
+        bookId = new mongoose.Types.ObjectId(bookId);
+
+        // Find the user by their ID
         const user = await User.findById(userId);
         if (!user) {
+            console.error("User not found with ID:", userId); // Debugging log
             return res.status(404).json({ message: "User not found" });
         }
 
-        user.cart = user.cart.filter(book => book._id.toString() !== bookId);
+        // Check if the book is in the user's favorites
+        const isFavorite = user.favorites.some(fav => fav.bookId.toString() === bookId.toString());
+
+        if (!isFavorite) {
+            console.error("Book not found in favorites for user:", userId); // Debugging log
+            return res.status(404).json({ message: "Book not found in favorites" });
+        }
+
+        // Remove the book from the user's favorites
+        user.favorites = user.favorites.filter(fav => fav.bookId.toString() !== bookId.toString());
+
+        // Save the updated user data
         await user.save();
 
-        res.status(200).json({ message: "Book removed from cart", cart: user.cart });
+        // Return the updated favorites list
+        const updatedUser = await User.findById(userId).populate('favorites.bookId');
+
+        res.status(200).json({
+            message: "Book removed from favorites",
+            favorites: updatedUser.favorites, // Return the updated favorites
+        });
     } catch (err) {
-        console.error("Error removing from cart:", err);
-        res.status(500).json({ message: "Error removing from cart. Please try again later." });
+        console.error("Error removing from favorites:", err);
+        res.status(500).json({ message: "Error removing from favorites. Please try again later." });
     }
 });
 
+
 // Function to add a book to favorites
-async function addToFavorites(userId, book) {
+async function addToFavorites(bookId) {
     try {
         const response = await fetch('http://localhost:9002/add-to-favorites', {
             method: 'POST',
@@ -265,7 +380,7 @@ async function addToFavorites(userId, book) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}` // Add the token for authentication
             },
-            body: JSON.stringify({ book }),
+            body: JSON.stringify({ bookId }),
         });
 
         if (!response.ok) {
@@ -282,15 +397,16 @@ async function addToFavorites(userId, book) {
 }
 
 // Function to remove a book from favorites
-async function removeFromFavorites(userId, bookId) {
+// Function to remove a book from favorites
+async function removeFromFavorites(bookId) {
     try {
         const response = await fetch('http://localhost:9002/remove-from-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Add the token for authentication
+                'Authorization': `Bearer ${token}`, // Add the token for authentication
             },
-            body: JSON.stringify({ bookId }),
+            body: JSON.stringify({ bookId }),  // Send the bookId in the request body
         });
 
         if (!response.ok) {
@@ -299,7 +415,8 @@ async function removeFromFavorites(userId, bookId) {
             return;
         }
 
-        console.log("Book removed from favorites successfully");
+        const data = await response.json();
+        console.log("Book removed from favorites successfully", data);
     } catch (error) {
         console.error("Network error:", error);
     }

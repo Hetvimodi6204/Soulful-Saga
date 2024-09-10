@@ -11,8 +11,8 @@
   position: absolute;
   top: 5rem;
   width: 88%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   z-index: 1;
   border: none;
   border-radius: 8px;
@@ -23,9 +23,11 @@
 .hero-content {
   color: #F9F9F9;
   position: relative;
-  padding: 20px;
   z-index: 1; 
   margin-right: 40rem;
+  max-width: 100%; /* Content takes up 40% of the screen */
+  text-align: left; /* Align text to the left */
+  padding: 20px;
 }
 
 .buttons {
@@ -39,16 +41,21 @@
   font-size: 5rem;
   margin-bottom: 20px;
   color: #222222;
+  font-family: 'Expletus Sans', sans-serif;
+  font-weight: bold;
 }
 .hero-content h1 span {
   color: #ff6347; 
   font-weight: bold; 
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .hero-content p {
   font-size: 2.5rem;
   margin-bottom: 20px;
   color: #222222;
+  font-family: 'Amiko', sans-serif;
+  font-weight: bold;
 }
 
 
@@ -57,53 +64,80 @@
   background-color:  #ff6347;
   color: black;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 900;
   padding: 10px 40px;
   font-size: 2rem;
   cursor: pointer;
   height: 5rem;
   border: none;
+  font-family: 'Amiko', sans-serif;
 }
-
-
-
 .btn-secondary:hover {
   background-color: #ffcba4; 
 }
 
 @media (max-width: 1024px) {
+  .hero-video {
+    width: 80%; 
+  }
+  .hero-content {
+    max-width: 100%;
+    margin-top: -80rem;
+    margin-left: 10rem;
+    width: 200%;
+
+  }
   .hero-content h1 {
-    font-size: 4rem;
-    max-width: 80%;
+    font-size: 3rem;
+    max-width: 100%;
+    text-align: center;
   }
 
   .hero-content p {
     font-size: 2rem;
-    max-width: 80%;
+    max-width: 100%;
+    text-align: center;
   }
 
   .btn-primary, .btn-secondary {
-    font-size: 1.4rem;
-    height: 3.5rem;
-    max-width: 80%;
+    font-size: 1rem;
+    height: 2.5rem;
+    padding: 8px 16px;
+    max-width: 40%;
+    margin-top: -1rem;
   }
 }
 
 @media (max-width: 768px) {
+  .hero-video {
+    width: 90%; /* Video takes up full width on mobile screens */
+  }
+
+  .hero-content {
+    max-width: 100%;
+    /* padding: 10px; */
+    margin-top: -100rem;
+    margin-left: 10rem;
+    width: 100%;
+  }
+
   .hero-content h1 {
     font-size: 3rem;
-    max-width: 60%;
+    max-width: 100%;
   }
 
   .hero-content p {
     font-size: 1.8rem;
-    max-width: 60%;
+    max-width: 100%;
   }
 
   .btn-primary, .btn-secondary {
-    font-size: 1.2rem;
-    height: 3rem;
-    max-width: 60%;
+    font-size: 1rem;
+    height: 2.5rem;
+    padding: 8px 16px;
+    max-width: 40%;
+    margin-left: 8rem;
+    margin-top: -1rem;
   }
 
   .buttons {
@@ -112,20 +146,36 @@
 }
 
 @media (max-width: 480px) {
+  .hero-video {
+    width: 100%; /* Video takes up full width on mobile screens */
+  }
+  .hero-content {
+    max-width: 100%;
+    margin-top: -45rem;
+    margin-left: 25rem;
+    width: 100%;
+  }
+
   .hero-content h1 {
-    font-size: 2.5rem;
-    max-width: 50%;
+    width: 20rem;
+    font-size: 2rem;
+    max-width: 100%;
+    text-align: center;
+    margin-left: 5rem;
   }
 
   .hero-content p {
     font-size: 1.5rem;
-    max-width: 50%;
+    max-width: 100%;
+    text-align: center;
   }
 
   .btn-primary, .btn-secondary {
     font-size: 1rem;
     height: 2.5rem;
     padding: 8px 16px;
-    max-width: 50%;
+    width: 30rem;
+    margin-left: 9rem;
+    margin-top: -1rem;
   }
 }

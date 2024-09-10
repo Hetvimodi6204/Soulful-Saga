@@ -9,14 +9,19 @@ import Aboutus from "../Aboutus/aboutus.js";
 import Books from "../books/books.js";
 import Blogs from "../Blogs/blogs.js";
 import FAQs from "../faqs/faqs.js";
-import {GiHamburgerMenu} from "react-icons/gi";
+import { GiHamburgerMenu} from "react-icons/gi"; 
+import { RxCross2 } from "react-icons/rx";
 import { Link } from "react-router-dom";
 const Navbar = () => {
-    const [showMediaIcons, setShowMediaIcons]= useState(false);
+    const [showMediaIcons, setShowMediaIcons] = useState(false);
+
+    const handleMenuToggle = () => {
+        setShowMediaIcons(!showMediaIcons);
+    };
   return (
     <>
-    <nav className="main-nav">
-        <img src={Logo} alt="Logo" className="logo-img" />
+     <nav className={`main-nav ${showMediaIcons ? "menu-open" : "menu-closed"}`}>
+     <img src={Logo} alt="Logo" className="logo-img" />
         <div className="logo">
             <h2>
                 <span>S</span>oulful
@@ -64,10 +69,11 @@ const Navbar = () => {
                     </li>
                 </ul>
                 {/* Hamburger menu */}
-                <div className="hamburger-menu">
-                    <a href="#" onClick={()=>setShowMediaIcons(!showMediaIcons)}>
-                        <GiHamburgerMenu/>
-                    </a>
+                <div className="hamburger-menu" onClick={handleMenuToggle}>
+                    <GiHamburgerMenu />
+                </div>
+                <div className="close-menu" onClick={handleMenuToggle}>
+                <RxCross2 />
                 </div>
             </div>
         </div>

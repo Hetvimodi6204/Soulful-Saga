@@ -1,45 +1,62 @@
 import React, { useState } from 'react';
 import "./login.css";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from "../navbar/navbar.js";
-import LoginImage from '../Images/cutout.png'; 
+import LoginImage from '../Images/login-cutout.png';
+
 const Login = () => {
-    const navigate = useNavigate(); 
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({
         email: "",
         password: ""
     });
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({
             ...user,
             [name]: value
         });
     };
-const login = () => {
-    axios.post("http://localhost:9002/login", user)
-        .then(res => {
-            if (res.data.token) {
-                localStorage.setItem('token', res.data.token);
-                console.log("Token saved to localStorage:", res.data.token); 
+
+    const login = (e) => {
+        e.preventDefault();
+
+        fetch("http://localhost:9002/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user),
+            credentials: 'include',
+        })
+        .then(async (res) => {
+            if (!res.ok) {
+                const errorData = await res.json();
+                throw new Error(errorData.message || "Error logging in");
+            }
+            return res.json();
+        })
+        .then((data) => {
+            if (data.token) {
+                document.cookie = `token=${data.token}; path=/; secure; samesite=strict`;
+                console.log("Token saved to cookie:", data.token);
                 alert("Login successful!");
-                navigate("/"); 
+                navigate("/"); // Redirect to home page after successful login
             } else {
                 alert("Login failed: No token received.");
-            } 
+            }
         })
-        .catch(err => {
-            console.error("Error logging in:", err);
-            if (err.response && err.response.status === 404) {
-                alert("Invalid credentials. Please try again."); 
+        .catch((err) => {
+            console.error("Error logging in:", err.message);
+            if (err.message === "Invalid credentials. Please try again.") {
+                alert(err.message); // Display specific error message
             } else {
-                alert("Error logging in. Please try again."); 
+                alert("Error logging in. Please try again."); // Generic error message
             }
         });
-};
+    };
 
     return (
         <>
@@ -50,9 +67,9 @@ const login = () => {
                         <h1 className="welcome-heading">Welcome Back!</h1>
                         <p className="welcome-p">Please enter your details to sign in</p>
                     </div>
-                    <div className="login-form">
+                    <form className="login-form" onSubmit={login}>
                         <input
-                            type="text"
+                            type="email"
                             name="email"
                             value={user.email}
                             onChange={handleChange}
@@ -65,13 +82,13 @@ const login = () => {
                             onChange={handleChange}
                             placeholder="Enter your password"
                         />
-                        <div className="button" onClick={login}>
+                        <button className="button" type="submit">
                             Login
-                        </div>
-                        <div className="login-or">or</div>
-                        <div className="button" onClick={() => navigate("/signup")}>
-                            Signup
-                        </div>
+                        </button>
+                    </form>
+                    <div className="login-or">or</div>
+                    <div className="button" onClick={() => navigate("/signup")}>
+                        Signup
                     </div>
                 </div>
                 <div className="login-image">
@@ -80,5 +97,6 @@ const login = () => {
             </div>
         </>
     );
-}    
+};
+
 export default Login;

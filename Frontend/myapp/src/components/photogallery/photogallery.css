@@ -14,35 +14,64 @@
 .header h1{
   font-size: 6rem;
   text-align: center;
-  font-family: 'Pacifico';
-  font-weight: 1200;
+  font-weight: 700;
+  font-family: 'Expletus Sans', sans-serif !important;
 }
 
 .header p{
-  font-size: 2rem;
+  font-size: 2.8rem;
   text-align: center;
   color: white;
   margin-top: 20px;
   margin-bottom: 50px;
-  font-family: 'Pacifico';
+  font-family: 'Amiko', sans-serif !important;
   font-weight: 500;
 }
 
 .carousel-item {
   padding: 20px;
-  height: 450px;
+  height: 500px; /* Increased height */
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.7s ease, opacity 0.7s ease;
+  position: relative;
+}
+
+.gradient-background {
+  position: relative;
+  width: 100%;
+  height: 75%;
+  border-radius: 10px;
+  background:url("../Images/DarkCoral.png");
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
 }
 
 .carousel-item img {
-  width: 100%;
-  height: 100%;
+  width: 110%;
+  height: auto;
   object-fit: cover;
   border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  z-index: 1;
+}
+
+.image-text {
+  margin-top: 10px;
+  text-align: center;
+  z-index: 2;
+}
+
+.image-text h3 {
+  color: white;
+  font-size: 2.3rem;
+  font-family: 'Expletus Sans';
+  text-align: center;
+  margin: 0;
 }
 
 .carousel-item:hover {
@@ -50,24 +79,73 @@
   opacity: 0.8;
 }
 
-.slick-slide {
-  transition: transform 1s ease;
-}
-
 @media (max-width: 1024px) {
-  .carousel-item {
-    height: 250px; 
+  .card{
+    margin-top: -55rem;
+  }
+  .header h1 {
+    font-size: 3.5rem; /* Adjusted font size for medium screens */
+  }
+   .carousel-item img{
+    width: 110%;
+    height: 30rem;
+   }
+   .gradient-background{
+    width: 90%;
+    height: 60%;
+   }
+  .header p {
+    font-size: 1.6rem; /* Adjusted font size for medium screens */
+  }
+
+  .image-text h3 {
+    font-size: 1.6rem; /* Adjusted font size for medium screens */
   }
 }
 
 @media (max-width: 768px) {
-  .carousel-item {
-    height: 200px; 
+  .card{
+    margin-top: -60rem;
   }
+  .header h1 {
+    font-size: 3rem; /* Adjusted font size for smaller screens */
+  }
+
+  .header p {
+    font-size: 1.4rem; /* Adjusted font size for smaller screens */
+  }
+
+  .image-text h3 {
+    font-size: 1.4rem; /* Adjusted font size for smaller screens */
+  }
+
+  .carousel-item {
+    padding: 10px; /* Reduced padding for smaller screens */
+  }
+  .carousel-item img{
+    width: 110%;
+    height: 20rem;
+   }
+   .gradient-background{
+    width: 100%;
+    height: 50%;
+   }
 }
 
 @media (max-width: 480px) {
+  .header h1 {
+    font-size: 2.5rem; /* Further adjusted font size for very small screens */
+  }
+
+  .header p {
+    font-size: 1.2rem; /* Further adjusted font size for very small screens */
+  }
+
+  .image-text h3 {
+    font-size: 1.2rem; /* Further adjusted font size for very small screens */
+  }
+
   .carousel-item {
-    height: 150px; 
+    padding: 5px; /* Further reduced padding for very small screens */
   }
 }

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import "./signup.css";
-import axios from "axios";
 import { useNavigate } from 'react-router-dom';
-import Navbar from "../navbar/navbar.js"
-import SignupImage from '../Images/cutout.png'; 
+import Navbar from "../navbar/navbar.js";
+import SignupImage from '../Images/signup-cutout.png'; 
+
 const Signup = () => {
     const navigate = useNavigate(); // Assign the navigate function
     const [user, setUser] = useState({
@@ -13,35 +13,42 @@ const Signup = () => {
         reEnterPassword: ""
     });
 
-    const handleChange = e => {
+    const handleChange = (e) => {
         const { name, value } = e.target;
-        console.log(name, value);
         setUser({
             ...user,
             [name]: value
         });
     };
 
-    const signup = () => {
+    const signup = (e) => {
+        e.preventDefault(); // Prevent the default form submission
+
         const { name, email, password, reEnterPassword } = user;
+
         if (name && email && password && (password === reEnterPassword)) {
-            axios.post("http://localhost:9002/signup", {
-                name,
-                email,
-                password
+            fetch("http://localhost:9002/signup", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ name, email, password })
             })
-            .then(res => {
-                console.log("Signup successful:", res.data); // Log the response data
-                alert("Signup successful!"); // Example: Show success message
+            .then(async (res) => {
+                if (!res.ok) {
+                    const errorData = await res.json();
+                    throw new Error(errorData.message || "Error signing up");
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log("Signup successful:", data);
+                alert("Signup successful!");
                 navigate("/"); // Redirect to home page after successful signup
             })
-            .catch(err => {
-                console.error("Error signing up:", err);
-                if (err.response && err.response.status === 400) {
-                    alert(err.response.data.message); // Show specific error message from backend
-                } else {
-                    alert("Error signing up. Please try again."); // Generic error message
-                }
+            .catch((err) => {
+                console.error("Error signing up:", err.message);
+                alert(err.message); // Display the error message
             });
         } else {
             alert("Invalid Input. Please fill all fields and ensure passwords match.");
@@ -57,7 +64,7 @@ const Signup = () => {
                         <h1 className="create-heading">Create Account</h1>
                         <p className="create-p">to get started now!</p>
                     </div>
-                    <div className="signup-form">
+                    <form className="signup-form" onSubmit={signup}>
                         <input
                             type="text"
                             name="name"
@@ -86,13 +93,13 @@ const Signup = () => {
                             onChange={handleChange}
                             placeholder="Re-enter your Password"
                         />
-                        <div className="button" onClick={signup}>
+                        <button className="button" type="submit">
                             Signup
-                        </div>
-                        <div className="signup-or">or</div>
-                        <div className="button" onClick={() => navigate("/login")}>
-                            Login
-                        </div>
+                        </button>
+                    </form>
+                    <div className="signup-or">or</div>
+                    <div className="button" onClick={() => navigate("/login")}>
+                        Login
                     </div>
                 </div>
                 <div className="signup-image">

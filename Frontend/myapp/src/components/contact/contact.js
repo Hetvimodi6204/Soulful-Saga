@@ -3,6 +3,7 @@ import emailjs from 'emailjs-com';
 import "./contact.css";
 import Footer from "../footer/footer.js"
 import Navbar from "../navbar/navbar.js"
+import Cutout from "../Images/contact-cutout.png";
 const ContactUs = () => {
   const form = useRef();
 
@@ -24,20 +25,20 @@ const ContactUs = () => {
     <div className="contact-container">
       <Navbar />
       <div className="contact-image">
-        <div className="contact-overlay">
-
+      <div className="contact-cutout">
+          <img src={Cutout}></img>
+        </div>
           <div className="contact-form">
             <h2 className="Contact-header">Contact Us</h2>
             <form ref={form} onSubmit={sendEmail}>
-              <input type="text" name="from_name" placeholder='Name'/>
-              <input type="email" name="from_email" placeholder='Email'/>
-              <textarea name="message" placeholder='Message'/>
+              <input type="text" name="from_name" placeholder='Name' />
+              <input type="email" name="from_email" placeholder='Email' />
+              <textarea name="message" placeholder='Message' />
               <input type="submit" value="Send" />
             </form>
           </div>
         </div>
       </div>
-    </div>
   );
 };
 

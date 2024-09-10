@@ -69,6 +69,7 @@ li {
   justify-content: flex-end;
   padding-right: 2rem;
   height: 7rem;
+  font-family: 'Expletus Sans', sans-serif;
   /* Added to push the hamburger to the edge */
 }
 
@@ -82,6 +83,7 @@ li {
 
 .login-signup-btn ul li {
   text-align: right;
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-signup-btn ul li:first-child {
@@ -91,17 +93,16 @@ li {
 /* ----------- Grid part ends ----------------- */
 .logo h2 {
   font-size: 2.5rem;
-  font-weight: 400;
+  font-weight: 900;
   text-transform: uppercase;
-  /* background: linear-gradient(#eee, rgb(69, 57, 248));
-  -webkit-background-clip: text; */
-  /* -webkit-text-fill-color: transparent; */
-  font-weight: bold;
   color: white;
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .logo h2 span {
   font-size: 3.5rem;
+  /* font-family: 'Expletus Sans', sans-serif; */
+  font-weight: 900;
 }
 
 .menu-link ul li {
@@ -113,6 +114,7 @@ li {
   text-transform: capitalize;
   color: rgba(255, 255, 255);
   transition: 0.5s;
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .menu-link ul li:hover>a {
@@ -123,7 +125,8 @@ li {
 }
 
 .login-signup-btn ul li {
-  font-size: 1.8rem;
+  font-size: 2rem;
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-signup-btn .hamburger-menu {
@@ -133,6 +136,7 @@ li {
   cursor: pointer;
   color: rgba(0, 0, 3, 0.8);
   transition: color 0.3s ease;
+  font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-signup-btn .hamburger-menu:hover {
@@ -159,7 +163,43 @@ li {
   text-align: center;
 }
 
-/* Responsive css style */
+/* General styles for icons */
+.hamburger-menu,
+.close-menu {
+  display: none;
+  font-size: 3rem;
+  cursor: pointer;
+  color: white;
+  transition: color 0.3s ease;
+  font-family: 'Expletus Sans', sans-serif;
+}
+
+.hamburger-menu:hover,
+.close-menu:hover {
+  color: white;
+}
+
+/* Show the hamburger menu when the menu is closed */
+.menu-closed .hamburger-menu {
+  display: block;
+}
+
+/* Show the close menu when the menu is open */
+.menu-open .close-menu {
+  display: block;
+}
+
+/* Hide the mobile menu when it's closed */
+.menu-closed .mobile-menu-link {
+  display: none;
+}
+
+/* Show the mobile menu when it's open */
+.menu-open .mobile-menu-link {
+  display: grid;
+}
+
+/* Media Queries */
 @media (max-width: 1080px) {
   .main-nav {
     height: 7rem;
@@ -180,8 +220,7 @@ li {
   }
 
   .menu-link {
-    display: none;
-    /* Hide menu links */
+    display: none; /* Hide menu links */
   }
 
   .logo,
@@ -195,28 +234,25 @@ li {
   }
 
   .login-signup-btn .btn-logo {
-    display: none;
-    /* Hide buttons */
+    display: none; /* Hide buttons */
   }
 
   .login-signup-btn .hamburger-menu {
-    display: block;
-    /* Show hamburger menu */
+    display: block; /* Show hamburger menu */
   }
 
   .mobile-menu-link {
     grid-column: 2/4;
     position: relative;
     z-index: 99;
-    background-color: white;
+    background-color: #333333;
+    color: white;
     height: 20rem;
     display: grid;
     align-items: center;
     padding-left: 3rem;
-    transition: all 2s linear;
+    transition: all 0.3s ease; /* Adjust transition for smoother appearance */
     transform-origin: top;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
-      rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
   }
 
   .mobile-menu-link ul {
@@ -247,8 +283,7 @@ li {
   }
 
   .login-signup-btn .hamburger-menu {
-    display: block;
-    /* Ensure hamburger menu is visible */
+    display: block; /* Ensure hamburger menu is visible */
   }
 }
 
@@ -275,8 +310,7 @@ li {
   }
 
   .login-signup-btn .hamburger-menu {
-    display: block;
-    /* Ensure hamburger menu is visible */
+    display: block; /* Ensure hamburger menu is visible */
   }
 
   /* Hero section */

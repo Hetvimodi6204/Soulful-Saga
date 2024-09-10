@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import Img1 from '../Images/about.png';
 import Img2 from '../Images/team1.jpg';
 import Img3 from '../Images/team2.jpg';
+import AboutCard from "../Images/aboutcard.png";
 import { FaLinkedin, FaGithubSquare, FaWhatsappSquare } from "react-icons/fa"
 import './aboutus.css';
 
@@ -42,7 +43,9 @@ const AboutUs = () => {
       {/* Section 1: About Us Heading and Description */}
       <div className="bg-abt">
         <div className="top-image-container">
-          <div className="top-image"></div>
+          <div className="top-image">
+            {/* <img src={AboutCard}></img> */}
+          </div>
           <div className="center-card-container">
             <div className={`center-card reveal ${visibleElements.aboutText ? 'visible' : ''}`}>
               <p ref={aboutTextRef}>

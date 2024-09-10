@@ -5,14 +5,15 @@ import 'slick-carousel/slick/slick-theme.css';
 import './photogallery.css';
 
 const images = [
-  { src: require('../Images/p0.jpg'), alt: 'Image 1' },
-  { src: require('../Images/p1.png'), alt: 'Image 2' },
-  { src: require('../Images/p2.png'), alt: 'Image 3' },
-  { src: require('../Images/p3.png'), alt: 'Image 4' },
-  { src: require('../Images/p4.jpg'), alt: 'Image 5' },
-  { src: require('../Images/p5.jpg'), alt: 'Image 6' },
-  { src: require('../Images/p6.jpg'), alt: 'Image 7' },
-  { src: require('../Images/p7.jpg'), alt: 'Image 4' },
+  { src: require('../Images/p0.jpg'), alt: 'Yoga & Meditation' },
+  { src: require('../Images/p1.jpg'), alt: 'Book Reading' },
+  { src: require('../Images/p2.jpg'), alt: 'Prayers' },
+  { src: require('../Images/p3.jpg'), alt: 'Mantra Chanting' },
+  { src: require('../Images/p5.jpg'), alt: 'Divine Invitation' },
+  { src: require('../Images/p6.jpg'), alt: 'Divine Beauty' },
+  { src: require('../Images/p7.jpg'), alt: 'Rejoice in God' },
+  { src: require('../Images/p8.jpg'), alt: 'Faith’s Key' },
+  { src: require('../Images/p9.jpg'), alt: 'Service and God' },
 ];
 
 const ThreeDCarousel = () => {
@@ -41,26 +42,22 @@ const ThreeDCarousel = () => {
       },
     ],
   };
-
-  const headerStyle = {
-    fontFamily: "'Julius Sans One', sans-serif",
-  };
-
-  const paragraphStyle = {
-    fontFamily: "'Raleway', sans-serif",
-  };
-
   return (
     <div className="card">
       <div className="three-d-carousel">
         <div className="header">
-          <h1 style={headerStyle}>Photogallery</h1>
-          <p style={paragraphStyle}>Join our live mantra chanting sessions to experience inner peace and spiritual connection.</p>
+          <h1>Photogallery</h1>
+          <p>Join our live mantra chanting sessions to experience inner peace and spiritual connection.</p>
         </div>
         <Slider {...settings}>
           {images.map((image, index) => (
             <div key={index} className="carousel-item">
-              <img src={image.src} alt={image.alt} />
+              <div className="gradient-background">
+                <img src={image.src} alt={image.alt}/>
+                <div className="image-text">
+                  <h3>{image.alt}</h3>
+                </div>
+              </div>
             </div>
           ))}
         </Slider>

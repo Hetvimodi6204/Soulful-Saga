@@ -1,14 +1,15 @@
 .login {
     position: relative;
     width: 100%;
-    max-width: 900px;
+    max-width: 800px;
     background: url('../Images/DarkCoral.png') no-repeat center center;
     background-size: cover;
     border-radius: 8px;
     padding: 2rem;
     margin: 10% auto;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     overflow: visible;
     margin-bottom: 3rem;
@@ -21,7 +22,9 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-right: 2rem;
+    padding-right: 0; /* Remove padding for smaller screens */
+    padding-bottom: 2rem; /* Add bottom padding for spacing */
+    text-align: center; /* Center text on smaller screens */
 }
 
 .welcome {
@@ -30,39 +33,46 @@
 }
 
 .welcome-heading {
-    font-size: 4rem;
+    font-size: 3rem; /* Reduced font size for better responsiveness */
     margin: 0;
+    font-family: 'Expletus Sans', sans-serif;
+    margin-left: 4rem;
 }
 
 .welcome-p {
-    font-size: 2rem;
-    margin: 0.5rem 0 0 0;
+    font-size: 1.8rem; /* Slightly reduced font size */
+    margin-left: 2rem;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    width: 130%;
 }
 
 .login-heading {
-    font-size: 5rem;
+    font-size: 3.5rem; /* Reduced font size */
     text-align: center;
     color: white;
-    margin-top: 5rem;
+    margin-top: 2rem; /* Reduced margin for smaller screens */
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-or {
-    font-size: 2rem;
+    font-size: 1.8rem; /* Slightly reduced font size */
     text-align: center;
-    margin-left: 21rem;
+    margin-left: 0; /* Reset margin to avoid overflow on smaller screens */
     color: #333333;
+    font-family: 'Expletus Sans', sans-serif;
+    margin-top: 1rem; /* Add top margin for spacing */
 }
 
 .login-form > input {
     border-radius: 8px;
-    border: 2px solid #dddfe2;
+    border: 1px solid black;
     outline: none;
     color: #1d2129;
     margin-top: 1rem;
@@ -70,20 +80,22 @@
     width: 100%;
     font-size: 1.6rem;
     text-align: left;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .button {
-    background: #ffcba4;
-    color: black;
+    background: linear-gradient(#333333, #666666);
+    color: white;
     font-size: 1.5rem;
     padding: 0.7rem;
     margin: 1rem 0;
     border-radius: 8px;
     outline: none;
     cursor: pointer;
-    width: 100%;
+    width: 100%; /* Full width for button on smaller screens */
     text-align: center;
     font-weight: 600;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .login-image {
@@ -91,64 +103,65 @@
     display: flex;
     justify-content: flex-end;
     margin-top: -11rem;
-    margin-bottom: -2rem;
-    margin-right: -3rem;
+    margin-bottom: -3.4rem;
+    margin-left: 20rem;
     z-index: 2;
 }
 
 .login-image img {
-    max-width: 100%;
+    max-width: 230%;
+    /* width: 70vw; */
     border-radius: 8px;
+    height: 33vw;
+    margin-right: -15rem;
 }
 
-@media (max-width: 768px) {
+/* Responsive Styles */
+@media (min-width: 768px) {
     .login {
-        flex-direction: column;
-        height: auto;
+        flex-direction: row; /* Side-by-side layout for larger screens */
+        max-width: 900px; /* Increase max-width */
     }
 
     .login-left {
-        padding-right: 0;
+        padding-right: 2rem; /* Restore padding for larger screens */
+        padding-bottom: 0; /* Remove bottom padding */
+        text-align: left; /* Left-align text on larger screens */
+    }
+
+    .login-heading {
+        font-size: 4rem; /* Increase font size for larger screens */
+        margin-top: 3rem; /* Adjust top margin */
     }
 
     .login-form {
-        width: 100%;
-    }
-
-    .login-image {
-        margin-top: 1rem;
-        margin-right: 0;
-    }
-
-    .login-heading {
-        font-size: 2rem;
+        align-items: flex-start; /* Left-align form elements */
     }
 
     .login-or {
-        font-size: 1.25rem;
+        margin-left: 21rem; /* Restore left margin */
+        margin-top: 0; /* Remove top margin */
+    }
+
+    .login-image {
+        justify-content: flex-end;
+        margin-top: -11rem; 
+        margin-bottom: -2rem;
+        margin-right: -3rem;
+        width: 100%;
     }
 }
 
-@media (max-width: 480px) {
-    .login {
-        width: 90%;
-        padding: 1rem;
-    }
-
-    .login-form > input, .login .button {
-        font-size: 1rem;
-        padding: 0.5rem;
+@media (min-width: 1024px) {
+    .welcome-heading {
+        font-size: 4rem; /* Larger font for large screens */
     }
 
     .login-heading {
-        font-size: 1.75rem;
+        font-size: 5rem; /* Larger font for large screens */
     }
 
-    .login-or {
-        font-size: 1rem;
-    }
-
-    .login-image {
-        margin-top: -1rem;
+    .welcome-p {
+        font-size: 2rem; /* Larger font for large screens */
     }
 }

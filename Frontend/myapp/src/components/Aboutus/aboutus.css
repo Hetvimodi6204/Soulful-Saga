@@ -14,35 +14,22 @@
     color: white;
     height: auto;
 }
+
 .top-header {
-    font-size: 6rem; 
+    font-size: 6rem;
     font-weight: bold;
     color: #fff;
     text-align: center;
-  }  
-
-.top-image-container {
-    position: relative;
-    height: 20vw;
-    overflow: visible;
-    z-index: 1;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
-.top-image {
-    height: 100%;
-    width: 100%;
-    background-color: #ffcba4;
-    background-size: cover;
-    color: white;
-    z-index: 1;
-}
 
 .center-card {
     flex: 1;
     margin-right: 20px;
     padding: 20px;
     border-radius: 4px;
-    background: rgba(0, 0, 0, 0.7);
+    background: #333333;
     color: white;
     border-radius: 10px;
     padding: 20px;
@@ -51,11 +38,12 @@
     align-items: center;
     gap: 20px;
 }
+
 .center-card-image {
-    width: 40%; 
-  height: auto;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+    width: 40%;
+    height: auto;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
 }
 
 .section2 {
@@ -69,7 +57,7 @@
     gap: 0;
     align-items: center;
     position: absolute;
-    left:50%;
+    left: 50%;
     padding: 20px;
     transform: translate(-50%, -50%);
     width: 80%;
@@ -78,8 +66,14 @@
     display: flex;
     justify-content: center;
     z-index: 1;
-    margin-top:8vw;
+    margin-top: 22vw;
     font-size: 2.3rem;
+    font-family: 'Expletus Sans', sans-serif;
+}
+
+.center-card-container p {
+    font-family: 'Expletus Sans', sans-serif;
+    text-align: center;
 }
 
 .center-card:hover {
@@ -89,7 +83,7 @@
 
 .Abt-card {
     font-size: 2rem;
-    background: rgba(0, 0, 0, 0.7);
+    background: #333333;
     padding: 20px;
     color: white;
     margin: 20px;
@@ -97,11 +91,12 @@
     max-width: 360px;
     width: 90%;
     /* Adjusted width for responsiveness */
-    height: 30vw;
+    height: 28vw;
     /* Changed to auto for responsiveness */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    margin-top:6vw;
+    margin-top: 6vw;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .Abt-card:hover {
@@ -114,10 +109,21 @@
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+    font-family: 'Expletus Sans', sans-serif;
+}
+
+.Abt-card-container h2 {
+    font-family: 'Expletus Sans', sans-serif;
+}
+
+.Abt-card-container p {
+    font-family: 'Expletus Sans', sans-serif;
+    font-size: 2rem;
+    margin-top: 2rem;
 }
 
 .team-card {
-    background: rgba(0, 0, 0, 0.7);
+    background: #333333;
     padding: 20px;
     margin: 20px;
     font-size: 1.7rem;
@@ -125,7 +131,7 @@
     max-width: 800px;
     width: 100%;
     /* Adjusted width for responsiveness */
-    height: 27vw;
+    height: 25vw;
     /* Changed to auto for responsiveness */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -143,6 +149,14 @@
     gap: 5px;
 }
 
+.team-grid h2 {
+    font-family: 'Expletus Sans', sans-serif;
+}
+
+.team-grid p {
+    font-family: 'Expletus Sans', sans-serif;
+}
+
 .team-member {
     display: flex;
     flex-direction: column;
@@ -156,13 +170,17 @@
     margin-bottom: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
+
 .icon-container {
     display: flex;
-    gap: 15px; /* Adjust the gap size as needed */
-    justify-content: center; /* Optional: to center the icons */
-    margin-top: 10px; /* Optional: Add some space above the icons */
-  }
-  
+    gap: 15px;
+    /* Adjust the gap size as needed */
+    justify-content: center;
+    /* Optional: to center the icons */
+    margin-top: 10px;
+    /* Optional: Add some space above the icons */
+}
+
 .reveal {
     opacity: 0;
     transform: translateY(70px);
@@ -190,57 +208,58 @@
 }
 
 @media (max-width: 1200px) {
+    .section {
+        padding: 30px 5%;
+    }
 
-    .center-card,
-    .Abt-card,
-    .team-card {
-        height: auto;
-        /* Adjust height for responsiveness */
+    .center-card-container {
+        width: 100%;
+    }
+
+    .Abt-card, .team-card {
+        margin: 10px 0;
     }
 }
 
 @media (max-width: 768px) {
-    .section {
-        padding: 50px 20px;
-        height: auto;
-        /* Adjust height for responsiveness */
+    .top-header {
+        font-size: 4rem;
     }
 
-    .center-card,
-    .Abt-card,
-    .team-card {
-        height: auto;
-        /* Adjust height for responsiveness */
+    .center-card-container {
+        width: 100%;
+        padding: 20px;
     }
 
-    .team-img {
-        max-width: 100px;
-    }
-
-    .team-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        /* Adjusted min-width for better responsiveness */
-    }
-}
-
-@media (max-width: 480px) {
-    .section {
-        padding: 20px 10px;
-    }
-
-    .center-card,
-    .Abt-card,
-    .team-card {
-        padding: 10px;
-        margin: 5px 0;
-    }
-
-    .team-img {
-        max-width: 80px;
+    .center-card {
+        margin-bottom: 20px;
     }
 
     .team-grid {
         grid-template-columns: 1fr;
-        /* Single column layout for small screens */
+        gap: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .top-header {
+        font-size: 3rem;
+    }
+
+    .section {
+        padding: 20px 5%;
+    }
+
+    .center-card-container {
+        padding: 10px;
+    }
+
+    .center-card {
+        margin-bottom: 15px;
+    }
+
+    .Abt-card, .team-card {
+        margin: 10px 0;
+        padding: 10px;
     }
 }

@@ -1,5 +1,3 @@
-/* Footer.css */
-
 /* General reset and box-sizing */
 * {
     margin: 0;
@@ -42,6 +40,7 @@ footer {
     padding: 0 20px;
 }
 
+/* Footer section styling */
 .footer-newsletter, .footer-explore, .footer-connect, .footer-followus {
     flex: 1 1 200px;
     margin: 10px;
@@ -52,8 +51,10 @@ footer {
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 2rem;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
+/* Newsletter form styling */
 .footer-newsletter form {
     display: flex;
     flex-direction: column;
@@ -65,6 +66,7 @@ footer {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 16px;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .footer-newsletter input[type="submit"] {
@@ -75,16 +77,20 @@ footer {
     color: white;
     font-size: 16px;
     cursor: pointer;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
+/* Footer text styling */
 .footer-explore p1, .footer-connect p1, .footer-followus p1 {
     display: block;
     margin-bottom: 8px;
     cursor: pointer;
     font-size: 1.7rem;
     color: #ff6347;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
+/* Footer icons styling */
 .footer-followus .footer-icons {
     display: flex;
     flex-direction: column;
@@ -105,33 +111,75 @@ footer {
 
 .footer-followus .footer-icons div p1 {
     margin: 0;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
 .footer-newsletter p {
     font-size: 12px;
     color: #999;
+    font-family: 'Expletus Sans', sans-serif;
 }
 
-/* Media Queries */
+/* Responsive adjustments */
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
         align-items: center;
-        text-align: center;
     }
 
     .footer-newsletter, .footer-explore, .footer-connect, .footer-followus {
         flex: 1 1 100%;
-        margin: 10px 0;
+        /* margin: 20px 0; */
+        text-align: center;
+        margin-top: 1rem;
+    }
+
+    .footer-newsletter input[type="email"], .footer-newsletter input[type="submit"] {
+        max-width: 100%;
+        width: 100%;
+        margin: 0 auto;  
+        margin-top: 1rem;
     }
 
     .footer-followus .footer-icons {
         flex-direction: row;
         justify-content: center;
-        margin-left: 50rem; /* Adjust this margin as needed */
+        flex-wrap: wrap;
     }
 
     .footer-followus .footer-icons div {
-        margin: 0 10px;
+        margin: 10px;
+    }
+
+    .footer-followus .footer-icons div a {
+        font-size: 20px;
+    }
+
+    .footer-explore p1, .footer-connect p1, .footer-followus p1 {
+        font-size: 1.5rem;
+    }
+
+    .footer-newsletter p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-newsletter p,
+    .footer-explore h2, .footer-connect h2, .footer-followus h2 {
+        font-size: 1.8rem;
+        margin-top: 3rem;
+    }
+
+    .footer-explore p1, .footer-connect p1, .footer-followus p1 {
+        font-size: 1.4rem;
+    }
+
+    .footer-followus .footer-icons div a {
+        font-size: 18px;
+    }
+
+    .footer-newsletter p {
+        font-size: 12px;
     }
 }

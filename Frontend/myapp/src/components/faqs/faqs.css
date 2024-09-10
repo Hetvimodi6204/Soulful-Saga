@@ -8,10 +8,11 @@
   font-weight: 600;
   text-align: center;
   margin-top: 8rem;
+  font-family: 'Expletus Sans', sans-serif;
 }
 .main-div {
-  width: 100vw; /* Take full width of the container */
-  max-width: 1200px; /* Optional: Set a max-width if you want */
+  width: 100vw; 
+  max-width: 1200px;
   padding: 70px 20px;
   border-radius: 10px;
   margin: 0 auto;
@@ -61,7 +62,7 @@
 .main-heading h3 {
   flex: 1;
   margin-left: 20px;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Amiko', sans-serif;
   word-spacing: 1px;
   letter-spacing: 1px;
   font-weight: 600;
@@ -77,4 +78,107 @@
   line-height: 1.7;
   background: #ff6347;
   color: black;
+  font-family: "Expletus Sans";
+}
+
+@media (max-width: 1024px) {
+  .faqs {
+    font-size: 3rem;
+    margin-top: 4rem;
+  }
+
+  .main-div {
+    padding: 40px 10px;
+    width: 80%;
+  }
+
+  .main-div h1 {
+    font-size: 3rem;
+    letter-spacing: 2px;
+    word-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .main-heading h3 {
+    font-size: 1.5rem;
+  }
+
+  .faq-item {
+    max-width: 90%;  /* Decrease width on medium screens */
+  }
+}
+
+/* Smaller Screens */
+@media (max-width: 768px) {
+  .faqs {
+    font-size: 2.5rem;
+    margin-top: 3rem;
+  }
+
+  .main-div {
+    padding: 30px 10px;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+  }
+
+  .main-div h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+  }
+
+  .main-heading {
+    padding: 10px 15px;
+  }
+
+  .main-heading h3 {
+    font-size: 1.2rem;
+  }
+
+  .answers {
+    font-size: 1.2rem;
+    padding: 15px;
+  }
+
+  .faq-item {
+    max-width: 85%; /* Decrease width on smaller screens */
+  }
+}
+
+/* Very Small Screens */
+@media (max-width: 480px) {
+  .faqs {
+    font-size: 3.5rem;
+    margin-top: 2rem;
+    margin-left: 13rem;
+    width: 70%;
+  }
+
+  .main-div {
+    padding: 20px 5px;
+    width: 1%;
+    margin-left: 30rem;
+  }
+
+  .main-div h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+
+  .main-heading {
+    padding: 10px 10px;
+  }
+
+  .main-heading h3 {
+    font-size: 1rem;
+  }
+
+  .answers {
+    font-size: 1rem;
+    padding: 10px;
+  }
+
+  .faq-item {
+    max-width: 90%; /* Further decrease width on very small screens */
+  }
 }

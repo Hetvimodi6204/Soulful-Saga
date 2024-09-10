@@ -23,7 +23,7 @@
   font-size: 6rem;
   margin-bottom: 20px;
   color: white;
-  font-family: 'Montserrat';
+  font-family: 'Expletus Sans', sans-serif;
   font-weight: bold;
 }
 
@@ -31,14 +31,38 @@
   font-size: 2.5rem; 
   color: white;
   line-height: 1.6;
-  font-family: 'Raleway'; 
+  font-family: 'Amiko', sans-serif; 
   font-weight: 500;
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
+  .about {
+    margin-top: 0; /* Adjust or remove top margin for medium screens if needed */
+  }
+
   .abt-card {
     padding: 30px;
+  }
+  
+  .abt-heading h1 {
+    font-size: 4rem;
+  }
+  
+  .abt-desc p {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about {
+    height: auto; /* Adjust height for smaller screens */
+    padding: 20px 10px; /* Reduced padding for smaller screens */
+    margin-top: -15rem;
+  }
+  
+  .abt-card {
+    padding: 20px;
   }
   
   .abt-heading h1 {
@@ -46,13 +70,17 @@
   }
   
   .abt-desc p {
-    font-size: 1.3rem;
+    font-size: 1.5rem; /* Adjusted for readability */
   }
 }
 
 @media (max-width: 480px) {
+  .about {
+    margin-top: -20rem;
+  }
+
   .abt-card {
-    padding: 20px;
+    padding: 15px;
   }
   
   .abt-heading h1 {
@@ -60,6 +88,6 @@
   }
   
   .abt-desc p {
-    font-size: 1.1rem;
+    font-size: 1.2rem; /* Adjusted for readability */
   }
 }

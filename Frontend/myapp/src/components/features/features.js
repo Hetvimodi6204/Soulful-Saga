@@ -29,7 +29,7 @@ const Features = () => {
   return (
     <div className="features-container">
       <div className="gradient-bg">
-        <h2 className="heading">Our Services</h2>
+        <h1 className="heading">Our Services</h1>
         <div className="mainContainer">
           {Data.map(({ id, image, title, description }) => (
             <div key={id} className="box">

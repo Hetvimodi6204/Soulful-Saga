@@ -21,33 +21,33 @@ import book15 from '../Images/bl7.jpg';
 import book16 from '../Images/bl8.jpg';
 import book17 from '../Images/bl9.png';
 import book18 from '../Images/bl10.jpg';
-const token = localStorage.getItem('authToken'); 
+const token = localStorage.getItem('authToken');
 
 const defaultBooks = [
-  { id: 1, image: book1, lang: 'English', title: 'Book1', descrip: 'Description of Book 1', price: 150 },
-  { id: 2, image: book2, lang: 'English', title: 'Book 2', descrip: 'Description of Book 2', price: 150 },
-  { id: 3, image: book3, lang: 'English', title: 'Book 3', descrip: 'Description of Book 3', price: 150 },
-  { id: 4, image: book4, lang: 'English', title: 'Book 4', descrip: 'Description of Book 4', price: 150 },
-  { id: 5, image: book5, lang: 'English', title: 'Book 5', descrip: 'Description of Book 5', price: 150 },
-  { id: 6, image: book6, lang: 'Hindi', title: 'Book 6', descrip: 'Description of Book 6', price: 150 },
-  { id: 7, image: book7, lang: 'Hindi', title: 'Book 7', descrip: 'Description of Book 7', price: 150 },
-  { id: 8, image: book8, lang: 'Gujarati', title: 'Book 8', descrip: 'Description of Book 8', price: 150 },
+  { id: 1, image: book1, lang: 'English', title: 'Book1', price: 150 },
+  { id: 2, image: book2, lang: 'English', title: 'Book 2', price: 150 },
+  { id: 3, image: book3, lang: 'English', title: 'Book 3', price: 150 },
+  { id: 4, image: book4, lang: 'English', title: 'Book 4', price: 150 },
+  { id: 5, image: book5, lang: 'English', title: 'Book 5', price: 150 },
+  { id: 6, image: book6, lang: 'Hindi', title: 'Book 6', price: 150 },
+  { id: 7, image: book7, lang: 'Hindi', title: 'Book 7', price: 150 },
+  { id: 8, image: book8, lang: 'Gujarati', title: 'Book 8', price: 150 },
 ];
 const bookList = [
-  { id: 9, image: book1, lang: 'Hindi', title: 'Bhagavad Gita as it is', descrip: 'Description of Book 7', price: 150 },
-  { id: 10, image: book9, lang: 'Gujarati', title: 'Mahabharata', descrip: 'Description of Book 8', price: 150 },
-  { id: 11, image: book10, lang: 'Hindi', title: 'Shrimad Bhagavatam', descrip: 'Description of Book 7', price: 150 },
-  { id: 12, image: book8, lang: 'Gujarati', title: 'Ramayana', descrip: 'Description of Book 8', price: 150 },
-  { id: 13, image: book17, lang: 'Hindi', title: 'Life comes from life', descrip: 'Description of Book 7', price: 150 },
-  { id: 14, image: book13, lang: 'Gujarati', title: 'Perfect Questions & Perfect Answers', descrip: 'Description of Book 8', price: 150 },
-  { id: 15, image: book14, lang: 'Gujarati', title: 'Beyond Birth & Death', descrip: 'Description of Book 8', price: 150 },
-  { id: 16, image: book15, lang: 'Gujarati', title: 'The Laws of Nature', descrip: 'Description of Book 8', price: 150 },
+  { id: 9, image: book1, lang: 'Hindi', title: 'Bhagavad Gita as it is', price: 150 },
+  { id: 10, image: book9, lang: 'Gujarati', title: 'Mahabharata', price: 150 },
+  { id: 11, image: book10, lang: 'Hindi', title: 'Shrimad Bhagavatam', price: 150 },
+  { id: 12, image: book8, lang: 'Gujarati', title: 'Ramayana', price: 150 },
+  { id: 13, image: book17, lang: 'Hindi', title: 'Life comes from life', price: 150 },
+  { id: 14, image: book13, lang: 'Gujarati', title: 'Perfect Questions & Perfect Answers', price: 150 },
+  { id: 15, image: book14, lang: 'Gujarati', title: 'Beyond Birth & Death', price: 150 },
+  { id: 16, image: book15, lang: 'Gujarati', title: 'The Laws of Nature', price: 150 },
 ];
 const additionalBooks = [
-  { id: 17, image: book11, lang: 'English', title: 'Near Death Experiences', descrip: 'Description of Book 9', price: 150 },
-  { id: 18, image: book12, lang: 'English', title: 'Out of Body Experience', descrip: 'Description of Book 10', price: 150 },
-  { id: 19, image: book16, lang: 'English', title: 'Krsna', descrip: 'Description of Book 11', price: 150 },
-  { id: 20, image: book18, lang: 'English', title: 'The Complete Book of Yoga', descrip: 'Description of Book 12', price: 150 },
+  { id: 17, image: book11, lang: 'English', title: 'Near Death Experiences', price: 150 },
+  { id: 18, image: book12, lang: 'English', title: 'Out of Body Experience', price: 150 },
+  { id: 19, image: book16, lang: 'English', title: 'Krsna', price: 150 },
+  { id: 20, image: book18, lang: 'English', title: 'The Complete Book of Yoga', price: 150 },
 ];
 
 const Books = ({ userId }) => {
@@ -58,64 +58,74 @@ const Books = ({ userId }) => {
   const [books, setBooks] = useState(bookList);
   const [searchInput, setSearchInput] = useState('');
   const [favorites, setFavorites] = useState([]);
+  const [quantity, setQuantity] = useState({});
 
-  async function fetchBooks() {
-    try {
+  useEffect(() => {
+    setFavoritesCount(favorites.length);
+  }, [favorites]);
+
+  const handleQuantityChange = (bookId, value) => {
+    setQuantity((prevQuantity) => ({
+      ...prevQuantity,
+      [bookId]: value, // Update quantity for the specific book
+    }));
+  };
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return decodeURIComponent(parts.pop().split(';').shift());
+  }
+  useEffect(() => {
+    async function fetchBooks() {
+      try {
         const response = await fetch('http://localhost:9002/books');
         const books = await response.json();
         console.log(books);
-    } catch (error) {
+      } catch (error) {
         console.error('Error fetching books:', error);
+      }
     }
-}
 
-fetchBooks();
+    fetchBooks();
+  }, []);
   const handleAddToCart = async (book) => {
-    const authToken = localStorage.getItem('token');
-    console.log("Auth Token:", authToken);
-    if (!authToken) {
-        alert("You need to log in to add items to the cart.");
-        return;
-    }
-
+    const token = getCookie('access_token');
+    const qty = quantity[book.id] || 1;
     try {
-        const decodedToken = jwtDecode(authToken);
-        const userId = decodedToken.userId;
-        console.log("Decoded User ID:", userId);
-        console.log("Book ID being added to cart:", book.id);
+      const response = await fetch('http://localhost:9002/add-to-cart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        credentials: 'include',
+        body: JSON.stringify({
+          bookId: book.id,
+          title: book.title,
+          price: book.price,
+          language: book.language,
+          quantity: qty,
+        }),
+      });
 
-        if (!userId) {
-            alert("You need to log in to add items to the cart.");
-            return;
-        }
-
-        const response = await fetch('http://localhost:9002/add-to-cart', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
-            },
-            body: JSON.stringify({ bookId: book.id }),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error("Error adding to cart:", errorData.message || 'Unknown error');
-          alert("Failed to add item to cart. Please try again.");
-      }       else {
-            const data = await response.json();
-            console.log("Book added to cart successfully", data);
-            alert("Book added to cart successfully!");
-        }
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Error adding to cart:", errorData.message || 'Unknown error');
+        alert("Failed to add item to cart. Please try again.");
+      } else {
+        const data = await response.json();
+        console.log("Book added to cart successfully", data);
+        setCartCount((prevCount) => prevCount + qty);
+        alert("Book added to cart successfully!");
+      }
     } catch (error) {
-        console.error("An unexpected error occurred:", error);
-        alert("An unexpected error occurred. Please try again.");
+      console.error("An unexpected error occurred:", error);
+      alert("An unexpected error occurred. Please try again.");
     }
-};
+  };
 
   const toggleShowMoreBooks = () => {
     setShowMoreBooks(!showMoreBooks);
-    // Reset books to default when toggling to "Show Less"
     if (showMoreBooks) {
       setBooks(defaultBooks);
     }
@@ -126,13 +136,10 @@ fetchBooks();
   };
 
   const handleSearch = () => {
-    // Filter books based on search input
     const filteredBooks = defaultBooks.filter(book =>
       book.lang.toLowerCase().includes(searchInput.toLowerCase())
     );
     setBooks(filteredBooks);
-
-    // Alert if the search input is not Hindi, English, or Gujarati
     if (searchInput.toLowerCase() !== 'hindi' && searchInput.toLowerCase() !== 'english' && searchInput.toLowerCase() !== 'gujarati') {
       alert('Please enter a valid language: Hindi, English, or Gujarati.');
     }
@@ -143,7 +150,40 @@ fetchBooks();
     setShowMoreBooks(true);
   };
 
+  useEffect(() => {
+    async function fetchFavorites() {
+      const token = getCookie('access_token');
+      try {
+        const response = await fetch('http://localhost:9002/favorites', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setFavorites(data.favorites);
+          console.log("Fetched favorites:", data.favorites);
+        } else {
+          console.error("Failed to fetch favorites");
+        }
+      } catch (error) {
+        console.error("Error fetching favorites:", error);
+      }
+    }
+
+    fetchFavorites();
+  }, []);
+
+
   const handleAddToFavorites = async (book) => {
+    console.log("Book ID being sent:", book.id); 
+    const token = getCookie('access_token');
+    console.log("Token in request:", token);
+
     try {
       const response = await fetch('http://localhost:9002/add-to-favorites', {
         method: 'POST',
@@ -151,26 +191,90 @@ fetchBooks();
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify({ book }),
+        credentials: 'include',
+        body: JSON.stringify({
+          bookId: book._id,
+          title: book.title,
+          price: book.price,
+          language: book.language,
+        }),
       });
 
+      console.log("Response status:", response.status);
+
       if (response.ok) {
-        const result = await response.json();
-        setFavorites(result.favorites);
-        setFavoritesCount(result.favorites.length);
-        alert(isFavorite(book) ? "Item removed from favorites" : "Item added to favorites");
+        setFavorites((prevFavorites) => {
+          const isAlreadyFavorite = prevFavorites.some(fav => fav.bookId === book.id);
+          if (isAlreadyFavorite) {
+            return prevFavorites.filter(fav => fav.bookId !== book.id); // Remove from favorites
+          } else {
+            return [...prevFavorites, { bookId: book.id }]; // Add to favorites
+          }
+        });
+        alert("Favorites updated successfully.");
       } else {
         const errorData = await response.json();
-        console.error("Server Error:", errorData.message);
         alert(`Error: ${errorData.message}`);
       }
     } catch (error) {
-      console.error("Network Error:", error.message);
-      alert("Network error, please try again later.");
+      console.error("Error adding to favorites:", error);
+      alert("Failed to update favorites. Please try again later.");
     }
   };
 
-  const isFavorite = (book) => favorites.includes(book.id);
+  const isFavorite = (book) => {
+    if (!book || !book.id) {
+      return false;
+    }
+
+    // Ensure bookId exists and isn't null
+    const isFav = favorites.some(fav => fav.bookId && fav.bookId.toString() === book.id.toString());
+
+    console.log(`Checking if book ${book.title} (ID: ${book.id}) is favorite: ${isFav}`);
+
+    return isFav;
+  };
+
+  const handleRemoveFromFavorites = async (bookId) => {
+    const token = getCookie('access_token');
+    try {
+        const response = await fetch('http://localhost:9002/remove-from-favorites', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            credentials: 'include',
+            body: JSON.stringify({bookId }),
+        });
+
+        if (response.ok) {
+            const result = await response.json();
+            // Update the favorites list after successful removal
+            setFavorites(result.favorites);
+            console.log("Updated favorites after removal:", result.favorites);
+            alert(result.message);
+        } else {
+            const errorData = await response.json();
+            alert(`Error: ${errorData.message}`);
+        }
+    } catch (error) {
+        console.error("Error removing from favorites:", error);
+        alert("Failed to remove from favorites. Please try again later.");
+    }
+};
+
+const toggleFavorite = async (book) => {
+  if (isFavorite(book)) {
+      // If the book is already a favorite, remove it
+      await handleRemoveFromFavorites(book);
+  } else {
+      // Otherwise, add it to favorites
+      await handleAddToFavorites(book);
+  }
+};
+
+
 
   return (
     <>
@@ -221,30 +325,38 @@ fetchBooks();
             />
             <button onClick={handleSearch}><FaSearch /> Search</button>
           </div>
-          <div className="cart-icon">
-            <span>Add to Cart</span>
-            <FaShoppingCart />
-            <span className="cart-count">{cartCount}</span>
-          </div>
-          <div className="favorites-icon">
-            <FaHeart />
-            <span className="favorites-count">{favoritesCount}</span>
+          <div className='icon-container'>
+            <div className="cart-icon">
+              <p>Add to Cart</p>
+              <FaShoppingCart />
+              <span className="cart-count">{cartCount}</span>
+            </div>
+            <div className="favorites-icon">
+              <FaHeart />
+              <span className="favorites-count">{favoritesCount}</span>
+            </div>
           </div>
         </div>
 
         <h2 className="books-header">Books List</h2>
         <div className="books-div1">
           {books.map(book => (
-            <div className="books1" key={book._id}>
+            <div className="books1" key={book.id}>
               <img src={book.image} alt={book.title} />
-              <div className="overlay" onClick={() => handleAddToFavorites(book)}>
+              <div className="overlay" onClick={() => toggleFavorite(book)}>
                 {isFavorite(book) ? <FaHeart className="heart-icon" /> : <FaRegHeart className="heart-icon" />}
               </div>
               <div className="lang">{book.lang}</div>
               <div className="title">{book.title}</div>
-              <div className="descrip">{book.descrip}</div>
               <div className="price"><LiaRupeeSignSolid />{book.price}</div>
               <button type='submit' onClick={() => handleAddToCart(book)} className='addtocartbtn'>Add to Cart</button>
+              <input
+                type="number"
+                min="1"
+                value={quantity[book.id] || 1}
+                onChange={(e) => handleQuantityChange(book.id, parseInt(e.target.value))}
+                className="quantity-input"
+              />
             </div>
           ))}
         </div>
@@ -279,8 +391,15 @@ fetchBooks();
             : defaultBooks.map((book) => (
               <div className="books2" key={book.id}>
                 <img src={book.image} alt={book.title} />
-                <div className="overlay" onClick={() => handleAddToFavorites(book)}>
-                  {isFavorite(book) ? <FaHeart className="heart-icon" /> : <FaRegHeart className="heart-icon" />}
+                <div className="overlay">
+
+                  <div onClick={() => toggleFavorite(book)}>
+                    {isFavorite(book) ? (
+                      <FaHeart className="favorite-icon filled" />
+                    ) : (
+                      <FaRegHeart className="favorite-icon" />
+                    )}
+                  </div>
                 </div>
               </div>
             ))}
