@@ -24,11 +24,11 @@ app.use(cors({
 dotenv.config();
 app.use(cookieParser());
 
-// Connect to MongoDB
-mongoose.connect("mongodb://localhost:27017/SoulfulSaga", {
-    // useNewUrlParser: true,
-    // useUnifiedTopology: true
+mongoose.connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
 })
+
     .then(() => {
         console.log("DB connected");
         app.listen(PORT, () => {
@@ -133,12 +133,12 @@ app.post("/login", async (req, res) => {
         console.log(token);
 
         // Store token in a cookie
-        res.cookie("access_token", token, {
+        res.cookie('access_token', token, {
             httpOnly: true,
-            sameSite: "lax",
-            secure: false, 
+            sameSite: 'Strict', // Strict or Lax depending on your use case
+            secure: process.env.NODE_ENV === 'production', // True in production
         });
-        
+
         console.log("cookie generated");
 
         // Respond with user info (excluding password)
@@ -200,8 +200,8 @@ app.post("/signup", async (req, res) => {
 
 
 const authenticateToken = (req, res, next) => {
-    const token = req.cookies.access_token; 
-    console.log("Token received:", token); 
+    const token = req.cookies.access_token;
+    console.log("Token received:", token);
     if (!token) {
         return res.status(403).json({ message: "No token provided, authorization denied." });
     }
@@ -224,7 +224,7 @@ app.get("/favorites", authenticateToken, async (req, res) => {
         if (!user) {
             return res.status(404).json({ message: "User not found" });
         }
-        console.log("Favorites for user:", user.favorites); 
+        console.log("Favorites for user:", user.favorites);
         res.status(200).json({
             favorites: user.favorites
         });
@@ -264,7 +264,7 @@ app.post("/add-to-favorites", authenticateToken, async (req, res) => {
 
         res.status(200).json({
             message: alreadyFavorite ? "Book removed from favorites" : "Book added to favorites",
-            favorites: updatedUser.favorites 
+            favorites: updatedUser.favorites
         });
     } catch (err) {
         console.error("Error adding to favorites:", err);
@@ -276,7 +276,7 @@ app.post("/add-to-favorites", authenticateToken, async (req, res) => {
 app.post("/add-to-cart", authenticateToken, async (req, res) => {
     let { bookId } = req.body;
 
-    const { title, price, language,quantity = 1 } = req.body; 
+    const { title, price, language, quantity = 1 } = req.body;
     const userId = req.user.userId;
 
     console.log("User ID:", userId);
@@ -318,57 +318,47 @@ app.post("/add-to-cart", authenticateToken, async (req, res) => {
     }
 });
 
-// Remove from favorites (server-side)
 app.post('/remove-from-favorites', authenticateToken, async (req, res) => {
-    let { bookId } = req.body; // Destructure bookId from request body
-    const userId = req.user.userId; // Get userId from the authenticated token
+    // Step 1: Extract bookId from the request body
+    const { bookId } = req.body;  // Only expect bookId as input
+    const userId = req.user.userId;  // The userId comes from the authenticated token
 
-    console.log("Received bookId:", bookId); // Debugging log
-    console.log("Received userId:", userId); // Debugging log
-
-    try {
-        // Validate bookId format
-        if (!mongoose.Types.ObjectId.isValid(bookId)) {
-            console.error("Invalid bookId format:", bookId); // Debugging log
-            return res.status(400).json({ message: "Invalid bookId format" });
-        }
-
-        // Convert bookId to ObjectId
-        bookId = new mongoose.Types.ObjectId(bookId);
-
-        // Find the user by their ID
-        const user = await User.findById(userId);
-        if (!user) {
-            console.error("User not found with ID:", userId); // Debugging log
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        // Check if the book is in the user's favorites
-        const isFavorite = user.favorites.some(fav => fav.bookId.toString() === bookId.toString());
-
-        if (!isFavorite) {
-            console.error("Book not found in favorites for user:", userId); // Debugging log
-            return res.status(404).json({ message: "Book not found in favorites" });
-        }
-
-        // Remove the book from the user's favorites
-        user.favorites = user.favorites.filter(fav => fav.bookId.toString() !== bookId.toString());
-
-        // Save the updated user data
-        await user.save();
-
-        // Return the updated favorites list
-        const updatedUser = await User.findById(userId).populate('favorites.bookId');
-
-        res.status(200).json({
-            message: "Book removed from favorites",
-            favorites: updatedUser.favorites, // Return the updated favorites
-        });
-    } catch (err) {
-        console.error("Error removing from favorites:", err);
-        res.status(500).json({ message: "Error removing from favorites. Please try again later." });
+    // Step 2: Validate the bookId format (make sure it's a valid ObjectId)
+    if (!mongoose.Types.ObjectId.isValid(bookId)) {
+        console.error("Invalid bookId format:", bookId);  // Log the error for debugging
+        return res.status(400).json({ message: "Invalid bookId format" });
     }
+
+    // Step 3: Find the user in the database by userId
+    const user = await User.findById(userId);  // Find the user by the userId in the token
+    if (!user) {
+        console.error("User not found:", userId);  // Log if the user doesn't exist
+        return res.status(404).json({ message: "User not found" });
+    }
+
+    // Step 4: Convert bookId to ObjectId to match with the saved format in favorites
+    const bookIdObject = mongoose.Types.ObjectId(bookId);
+
+    // Step 5: Check if the bookId is in the user's favorites
+    const isFavorite = user.favorites.some(fav => fav.bookId.toString() === bookIdObject.toString());
+    if (!isFavorite) {
+        console.error("Book not found in favorites:", bookId);  // Log if the book is not found
+        return res.status(404).json({ message: "Book not found in favorites" });
+    }
+
+    // Step 6: Remove the book from the user's favorites
+    user.favorites = user.favorites.filter(fav => fav.bookId.toString() !== bookIdObject.toString());
+
+    // Step 7: Save the updated user document to the database
+    await user.save();
+
+    // Step 8: Respond with a success message and the updated favorites list
+    res.status(200).json({
+        message: "Book removed from favorites",
+        favorites: user.favorites  // Return the updated list of favorites
+    });
 });
+
 
 
 // Function to add a book to favorites
@@ -378,7 +368,7 @@ async function addToFavorites(bookId) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Add the token for authentication
+                'Authorization': Bearer`${token}` // Add the token for authentication
             },
             body: JSON.stringify({ bookId }),
         });
@@ -404,7 +394,7 @@ async function removeFromFavorites(bookId) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`, // Add the token for authentication
+                'Authorization': Bearer`${token}`, // Add the token for authentication
             },
             body: JSON.stringify({ bookId }),  // Send the bookId in the request body
         });
@@ -429,7 +419,7 @@ async function addToCart(userId, book) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Add the token for authentication
+                'Authorization': Bearer`${token}` // Add the token for authentication
             },
             body: JSON.stringify({ book }),
         });
@@ -453,7 +443,7 @@ async function removeFromCart(userId, bookId) {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}` // Add the token for authentication
+                'Authorization': Bearer`${token}` // Add the token for authentication
             },
             body: JSON.stringify({ bookId }),
         });

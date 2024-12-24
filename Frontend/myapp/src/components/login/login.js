@@ -40,7 +40,6 @@ const Login = () => {
         })
         .then((data) => {
             if (data.token) {
-                document.cookie = `token=${data.token}; path=/; secure; samesite=strict`;
                 console.log("Token saved to cookie:", data.token);
                 alert("Login successful!");
                 navigate("/"); // Redirect to home page after successful login

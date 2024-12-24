@@ -139,10 +139,6 @@ li {
   font-family: 'Expletus Sans', sans-serif;
 }
 
-.login-signup-btn .hamburger-menu:hover {
-  color: rgba(0, 0, 3, 1);
-}
-
 /* Hero section */
 .hero-section {
   height: 80vh;
@@ -264,6 +260,71 @@ li {
   }
 }
 
+@media (min-width: 998px) {
+  .hamburger-menu, 
+  .close-menu {
+    display: none; /* Hide both the hamburger and close menu on large screens */
+  }
+
+  .menu-link {
+    display: flex; /* Ensure menu links are visible on large screens */
+  }
+
+  .mobile-menu-link {
+    display: none; /* Ensure mobile menu is hidden on large screens */
+  }
+}
+
+/* Show the hamburger menu and mobile menu on screens smaller than 998px */
+@media (max-width: 998px) {
+  .hamburger-menu {
+    display: block; /* Show the hamburger menu on smaller screens */
+  }
+
+  .close-menu {
+    display: none; /* Hide the close icon initially */
+  }
+
+  .menu-open .close-menu {
+    display: block; /* Show the close icon when the menu is open */
+  }
+
+  .menu-open .hamburger-menu {
+    display: none; /* Hide the hamburger icon when the menu is open */
+  }
+
+  .menu-link {
+    display: none; /* Hide the full menu on smaller screens */
+  }
+
+  .menu-open .mobile-menu-link {
+    display: grid; /* Show mobile menu when the hamburger is clicked */
+  }
+
+  .menu-closed .mobile-menu-link {
+    display: none; /* Hide the mobile menu when it's closed */
+  }
+}
+
+/* Show the full menu on larger screens */
+@media (min-width: 998px) {
+  .menu-link {
+    display: block;
+  }
+}
+
+/* Hide the full menu on smaller screens */
+@media (max-width: 998px) {
+  .menu-link {
+    display: none; /* Hide full menu on small screens (when hamburger is shown) */
+  }
+
+  .mobile-menu-link {
+    display: grid; /* Mobile menu will appear on smaller screens */
+  }
+}
+
+
 @media (max-width: 798px) {
   .main-nav {
     height: 6rem;
@@ -351,4 +412,97 @@ li {
 .login-signup-btn ul li:first-child button:hover {
   background-color: #ff7f50;
   /* Different hover color for login button */
+}
+
+@media (max-width: 768px) {
+  .main-nav {
+    height: 6rem;
+    grid-template-columns: 1rem 3fr 3fr 3fr 1rem; /* Adjusted to fit logo, buttons, and hamburger */
+  }
+
+  /* Adjust the logo size and positioning */
+  .logo {
+    grid-column: 2/3;
+    justify-content: start;
+    align-items: center;
+    margin-left: 1rem; /* Reduce margin */
+  }
+
+  /* Adjust the logo image size */
+  .logo-img {
+    width: 3rem; /* Reduce logo size */
+    height: 4rem;
+    margin-left: 0.5rem; /* Reduce margin */
+    margin-top: 1rem;
+  }
+
+  /* Adjust the size of the text "SoulfulSaga" */
+  .logo h2 {
+    font-size: 2rem; /* Reduce the font size */
+    margin-left: 0.5rem;
+  }
+
+  .logo h2 span {
+    font-size: 2.5rem; /* Reduce the size to avoid overlap */
+  }
+
+  /* Show the buttons even on small screens */
+  .login-signup-btn {
+    grid-column: 3/5; /* Move buttons into the grid layout */
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+  }
+
+  .login-signup-btn ul {
+    display: flex; /* Ensure the buttons are visible */
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .login-signup-btn ul li {
+    margin-left: 0.5rem; /* Adjust spacing */
+  }
+
+  .login-signup-btn ul li button {
+    padding: 0.5rem 1rem; /* Reduce button padding */
+    font-size: 1.5rem; /* Smaller font size for buttons */
+  }
+
+  /* Adjust the hamburger menu */
+  .login-signup-btn .hamburger-menu {
+    font-size: 2.5rem; /* Reduce size for small screens */
+    margin-left: 1rem;
+  }
+}
+
+@media (max-width: 520px) {
+  /* Further adjustments for very small screens */
+  .main-nav {
+    grid-template-columns: 1rem 4fr 1fr 1fr 1rem; /* Adjust grid to ensure all items fit */
+  }
+
+  .logo h2 {
+    font-size: 1.8rem; /* Further reduce the text size */
+    margin-left: 0.3rem; /* Reduce margin */
+  }
+
+  .logo-img {
+    width: 2.5rem; /* Further reduce logo size */
+    height: 3.5rem;
+    margin-left: 0.3rem;
+  }
+
+  .login-signup-btn ul li button {
+    padding: 0.5rem 1rem; /* Reduce padding on buttons */
+    font-size: 1.3rem; /* Smaller font size */
+  }
+
+  /* Adjust hamburger menu */
+  .login-signup-btn .hamburger-menu {
+    font-size: 2rem; /* Reduce size */
+    margin-left: 1rem;
+  }
 }
