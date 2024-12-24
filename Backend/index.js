@@ -24,10 +24,7 @@ app.use(cors({
 dotenv.config();
 app.use(cookieParser());
 
-mongoose.connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-})
+mongoose.connect(mongodb+srv://hetvimodi:hetvimodi6204@cluster0.gbttx9i.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0)
 
     .then(() => {
         console.log("DB connected");
