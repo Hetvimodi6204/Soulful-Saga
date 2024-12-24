@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
-    origin: ['https://soulful-saga-frontend.vercel.app/'],
+    origin: ['https://soulful-saga-frontend.vercel.app'],
     methods: ["GET,POST, PUT, HEAD, DELETE, PATCH"],
     credentials: true,
 }));
