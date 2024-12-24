@@ -27,7 +27,7 @@ const Signup = () => {
         const { name, email, password, reEnterPassword } = user;
 
         if (name && email && password && (password === reEnterPassword)) {
-            fetch("http://localhost:9002/signup", {
+            fetch("https://soulful-saga.vercel.app/signup", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
