@@ -34,7 +34,7 @@ function App() {
         <Footer />
         <footer className="vercel-footer">
           <a 
-            href="https://soulfulsaga.vercel.app" 
+            href="https://soulful-saga-back1.vercel.app" 
             target="_blank" 
             rel="noopener noreferrer"
             className="vercel-link"
