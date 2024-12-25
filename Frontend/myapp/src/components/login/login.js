@@ -23,7 +23,7 @@ const Login = () => {
     const login = (e) => {
         e.preventDefault();
 
-        fetch("https://soulful-saga.vercel.app/login", {
+        fetch("https://soulful-saga-back1.vercel.app/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
