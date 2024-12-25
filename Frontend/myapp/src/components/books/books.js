@@ -78,7 +78,7 @@ const Books = ({ userId }) => {
   useEffect(() => {
     async function fetchBooks() {
       try {
-        const response = await fetch('https://soulful-saga.vercel.app/books');
+        const response = await fetch('https://soulful-saga-back1.vercel.app/books');
         const books = await response.json();
         console.log(books);
       } catch (error) {
@@ -92,7 +92,7 @@ const Books = ({ userId }) => {
     const token = getCookie('access_token');
     const qty = quantity[book.id] || 1;
     try {
-      const response = await fetch('https://soulful-saga.vercel.app/add-to-cart', {
+      const response = await fetch('https://soulful-saga-back1.vercel.app/add-to-cart', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -154,7 +154,7 @@ const Books = ({ userId }) => {
     async function fetchFavorites() {
       const token = getCookie('access_token');
       try {
-        const response = await fetch('https://soulful-saga.vercel.app/favorites', {
+        const response = await fetch('https://soulful-saga-back1.vercel.app/favorites', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -185,7 +185,7 @@ const Books = ({ userId }) => {
     console.log("Token in request:", token);
 
     try {
-      const response = await fetch('https://soulful-saga.vercel.app/add-to-favorites', {
+      const response = await fetch('https://soulful-saga-back1.vercel.app/add-to-favorites', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -238,7 +238,7 @@ const Books = ({ userId }) => {
   const handleRemoveFromFavorites = async (bookId) => {
     const token = getCookie('access_token');
     try {
-        const response = await fetch('https://soulful-saga.vercel.app/remove-from-favorites', {
+        const response = await fetch('https://soulful-saga-back1.vercel.app/remove-from-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
