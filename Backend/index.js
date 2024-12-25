@@ -17,9 +17,10 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors({
     origin: ['https://soulful-saga-front2.vercel.app'],
-    methods: ["GET,POST, PUT, HEAD, DELETE, PATCH"],
-    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+    credentials: true, 
 }));
+
 
 dotenv.config();
 app.use(cookieParser());
@@ -205,7 +206,7 @@ const authenticateToken = (req, res, next) => {
 
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY);
-        req.user = decoded; // Attach the decoded user information to the request
+        req.user = decoded; 
         next();
     } catch (err) {
         console.error("Token verification failed:", err);
@@ -361,7 +362,7 @@ app.post('/remove-from-favorites', authenticateToken, async (req, res) => {
 // Function to add a book to favorites
 async function addToFavorites(bookId) {
     try {
-        const response = await fetch('http://localhost:9002/add-to-favorites', {
+        const response = await fetch('https://soulful-saga-backend.vercel.app/add-to-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -387,7 +388,7 @@ async function addToFavorites(bookId) {
 // Function to remove a book from favorites
 async function removeFromFavorites(bookId) {
     try {
-        const response = await fetch('http://localhost:9002/remove-from-favorites', {
+        const response = await fetch('https://soulful-saga-backend.vercel.app/remove-from-favorites', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -412,7 +413,7 @@ async function removeFromFavorites(bookId) {
 // Function to add a book to cart
 async function addToCart(userId, book) {
     try {
-        const response = await fetch('http://localhost:9002/add-to-cart', {
+        const response = await fetch('https://soulful-saga-backend.vercel.app/add-to-cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -436,7 +437,7 @@ async function addToCart(userId, book) {
 // Function to remove a book from cart
 async function removeFromCart(userId, bookId) {
     try {
-        const response = await fetch('http://localhost:9002/remove-from-cart', {
+        const response = await fetch('https://soulful-saga-backend.vercel.app/remove-from-cart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
